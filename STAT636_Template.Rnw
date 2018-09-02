@@ -1,0 +1,16 @@
+\documentclass[12pt,a4paper]{paper}
+\usepackage[utf8]{inputenc}
+\usepackage[spanish]{babel}
+\usepackage{amsmath}
+\usepackage{enumitem}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage[left=2cm,right=2cm,top=2cm,bottom=2cm]{geometry}
+\begin{document}
+\title{STAT636 - Homework 1\\\small{Daniel Osorio - dcosorioh@tamu.edu\\Department of Veterinary Integrative Biosciences\\Texas A\&M University}}
+\maketitle
+\SweaveOpts{concordance=TRUE}
+\begin{enumerate}
+\item 
+\end{enumerate}
+\end{document}
