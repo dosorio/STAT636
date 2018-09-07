@@ -5,7 +5,8 @@
 \usepackage{enumitem}
 \usepackage{amsfonts}
 \usepackage{amssymb}
-\usepackage[left=1cm,right=1cm,top=1cm,bottom=2cm]{geometry}
+\usepackage{multicol}
+\usepackage[left=1cm,right=1cm,top=1.5cm,bottom=2cm]{geometry}
 \usepackage{Sweave}
 \begin{document}
 \title{STAT636 - Homework 1\\\small{Daniel Osorio - dcosorioh@tamu.edu\\Department of Veterinary Integrative Biosciences\\Texas A\&M University}}
@@ -20,16 +21,287 @@
 Without using a computer:
 \begin{enumerate}
 \item Find the eigenvalues and normalized eigenvectors of \textbf{A}.
-\begin{equation*}
-(\textbf{A}-\lambda \textbf{I})x = 0
-\end{equation*}
+\begin{multicols}{2}
+\begin{equation}
+\left|\left[\begin{array}{cc}2 & 2 \\2 & -1\end{array}\right]-\lambda \left[\begin{array}{cc}1 & 0 \\0 & 1\end{array}\right]\right|
+\end{equation}
+\begin{equation}
+\left|\left[\begin{array}{cc}
+    2-\lambda & 2 \\
+    2 & -1-\lambda
+\end{array}\right]\right|
+\end{equation}
+\begin{equation}
+\left(2-\lambda \right)\left(-1 -\lambda \right) - 4
+\end{equation}
+\begin{equation}
+-2 -2\lambda + \lambda + \lambda^2 - 4
+\end{equation}
+\begin{equation}
+\lambda^2 - \lambda -6
+\end{equation}
+\begin{equation}
+\left(\lambda + 3\right)\left(\lambda - 2\right) = 0
+\end{equation}
+\begin{equation}
+\left(\lambda - 3\right) = 0: \lambda = 3
+\end{equation}
+\begin{equation}
+\left(\lambda + 2\right) = 0: \lambda = -2
+\end{equation}
+\textbf{The eigenvalues are: $\left[3 , -2\right]$}
+
+Solving for $\lambda = 3$
+\begin{equation}
+\left[\begin{array}{cc}
+    2 & 2 \\
+    2 & -1
+\end{array}\right]-3\left[\begin{array}{cc}
+    1 & 0 \\
+    0 & 1
+\end{array}\right] = \left[\begin{array}{cc}
+    -1 & 2 \\
+    2 & -4
+\end{array}\right]
+\end{equation}
+\begin{equation}
+\left[\begin{array}{cc}
+    -1 & 2 \\
+    2 & -4
+\end{array}\right]\left[\begin{array}{c}
+    x \\
+    y
+\end{array}\right] = \left[\begin{array}{c}
+    0 \\
+    0
+\end{array}\right]
+\end{equation}
+\begin{equation}
+\left[\begin{array}{cc}
+    2 & -4 \\
+    0 & 0
+\end{array}\right]\left[\begin{array}{c}
+    x \\
+    y
+\end{array}\right] = \left[\begin{array}{c}
+    0 \\
+    0
+\end{array}\right]
+\end{equation}
+\begin{equation}
+\left[\begin{array}{cc}
+    1 & -2 \\
+    0 & 0
+\end{array}\right]\left[\begin{array}{c}
+    x \\
+    y
+\end{array}\right] = \left[\begin{array}{c}
+    0 \\
+    0
+\end{array}\right]
+\end{equation}
+\begin{equation}
+x-2y=0
+\end{equation}
+\begin{equation}
+x=2y
+\end{equation}
+Setting $y = 1$ then \textbf{the eigenvectors for $\lambda = 3$ are $\left[2, 1\right]$}
+\begin{equation}
+\left[\begin{array}{cc}2 & 1\end{array}\right] \left[\begin{array}{c}2 \\ 1\end{array}\right] = 2 \times 2 + 1 \times 1 = 5
+\end{equation}
+The normalized eigenvectors for $\lambda = 3$ are $\left[\frac{2}{\sqrt{5}}, \frac{1}{\sqrt{5}}\right] = \left[\begin{array}{cc}0.8944272 & 0.4472136\end{array}\right]$
+
+Solving for $\lambda = -2$
+\begin{equation}
+\left[\begin{array}{cc}
+    2 & 2 \\
+    2 & -1
+\end{array}\right] -  -2\left[\begin{array}{cc}
+    1 & 0 \\
+    0 & 1
+\end{array}\right] = \left[\begin{array}{cc}
+    4 & 2 \\
+    2 & 1
+\end{array}\right]
+\end{equation}
+\begin{equation}
+\left[\begin{array}{cc}
+    4 & 2 \\
+    2 & 1
+\end{array}\right]\left[\begin{array}{c}
+    x \\
+    y
+\end{array}\right] = \left[\begin{array}{c}
+    0 \\
+    0
+\end{array}\right]
+\end{equation}
+\begin{equation}
+\left[\begin{array}{cc}
+    4 & 2 \\
+    0 & 0
+\end{array}\right]\left[\begin{array}{c}
+    x \\
+    y
+\end{array}\right] = \left[\begin{array}{c}
+    0 \\
+    0
+\end{array}\right]
+\end{equation}
+\begin{equation}
+\left[\begin{array}{cc}
+    1 & \frac{1}{2} \\
+    0 & 0
+\end{array}\right]\left[\begin{array}{c}
+    x \\
+    y
+\end{array}\right] = \left[\begin{array}{c}
+    0 \\
+    0
+\end{array}\right]
+\end{equation}
+\begin{equation}
+x+\frac{1}{2}y=0
+\end{equation}
+\begin{equation}
+x=-\frac{1}{2}y
+\end{equation}
+Setting $y = 1$ then \textbf{the eigenvectors for $\lambda = -2$ are $\left[-\frac{1}{2}, 1\right]$}
+\begin{equation}
+\left[\begin{array}{cc}-\frac{1}{2} & 1\end{array}\right] \left[\begin{array}{c}-\frac{1}{2} \\ 1\end{array}\right] = -\frac{1}{2} \times -\frac{1}{2} + 1 \times 1 = 1.25
+\end{equation}
+The normalized eigenvectors for $\lambda = 3$ are $\left[\frac{-\frac{1}{2}}{\sqrt{1.25}}, \frac{1}{\sqrt{1.25}}\right] = \left[\begin{array}{cc}-0.4472136 & 0.8944272\end{array}\right]$
+\end{multicols}
 \item Write the spectral decomposition of \textbf{A}.
+\begin{equation}
+\left[\begin{array}{cc}2 & 2 \\ 2 & -1\end{array}\right] = \left(3 \left[\begin{array}{c}0.894 \\ 0.447\end{array}\right]\left[\begin{array}{cc}0.894 & 0.447\end{array}\right]\right) + \left(-2 \left[\begin{array}{c}-0.447 \\ 0.894\end{array}\right]\left[\begin{array}{cc}-0.447 & 0.894\end{array}\right]\right)
+\end{equation}
+\begin{equation}
+\left[\begin{array}{cc}2 & 2 \\ 2 & -1\end{array}\right] = \left(3 \left[\begin{array}{cc}0.8 & 0.4 \\ 0.4 & 0.2\end{array}\right]\right) + \left(-2 \left[\begin{array}{cc}0.2 & -0.4 \\ -0.4 & 0.8\end{array}\right]\right)
+\end{equation}
+\begin{equation}
+\left[\begin{array}{cc}2 & 2 \\ 2 & -1\end{array}\right] = \left[\begin{array}{cc}2.4 & 1.2 \\ 1.2 & 0.6\end{array}\right] + \left[\begin{array}{cc}-0.4 & 0.8 \\ 0.8 & -1.6\end{array}\right]
+\end{equation}
+\begin{equation}
+\left[\begin{array}{cc}2 & 2 \\ 2 & -1\end{array}\right] = \left[\begin{array}{cc}2 & 2 \\ 2 & -1\end{array}\right] 
+\end{equation}
 \item Verify that the determinant of \textbf{A} equals the product of its eigenvalues.
+\begin{equation}
+\left|\left[\begin{array}{cc}2 & 2 \\ 2 & -1\end{array}\right]\right| = 3 \times -2
+\end{equation}
+\begin{equation}
+\left(2 \times -1\right)-\left(2 \times 2\right) = -6
+\end{equation}
+\begin{equation}
+-6 = -6
+\end{equation}
 \item The trace of a square matrix equals the sum of its diagonal elements. Verify that the
 trace of \textbf{A} equals the sum of its eigenvalues.
+\begin{equation}
+tr\left(\left[\begin{array}{cc}2 & 2 \\ 2 & -1\end{array}\right]\right) = 3 + -2
+\end{equation}
+\begin{equation}
+(2 + -1) = 1
+\end{equation}
+\begin{equation}
+1 = 1
+\end{equation}
 \item Is \textbf{A} orthogonal? Why or why not?
 \item Is \textbf{A} positive definite? Why or why not?
 \item Find \textbf{A}$^{-1}$ and determine its eigenvalues and normalized eigenvectors.
+\begin{equation}
+\left[\begin{array}{cc}2 & 2 \\ 2 & -1\end{array}\right]^{-1} = \frac{1}{\left|\left[\begin{array}{cc}2 & 2 \\ 2 & -1\end{array}\right]\right|}\left[\begin{array}{cc}-1 & -2 \\ -2 & 2\end{array}\right]
+\end{equation}
+\begin{equation}
+\left[\begin{array}{cc}2 & 2 \\ 2 & -1\end{array}\right]^{-1} = \frac{1}{\left(2 \times -1\right)-\left(2 \times 2\right)}\left[\begin{array}{cc}-1 & -2 \\ -2 & 2\end{array}\right]
+\end{equation}
+\begin{equation}
+\left[\begin{array}{cc}2 & 2 \\ 2 & -1\end{array}\right]^{-1} = \frac{1}{-6}\left[\begin{array}{cc}-1 & -2 \\ -2 & 2\end{array}\right]
+\left[\begin{array}{cc}2 & 2 \\ 2 & -1\end{array}\right]^{-1} = \left[\begin{array}{cc}\frac{1}{6} & \frac{1}{3} \\ \frac{1}{3} & \frac{-1}{3}\end{array}\right]
+\end{equation}
+\begin{equation}
+\left[\begin{array}{cc}2 & 2 \\ 2 & -1\end{array}\right]^{-1} = \left[\begin{array}{cc}0.17 & 0.33 \\ 0.33 & -0.33\end{array}\right]
+\end{equation}
+\begin{equation}
+\left|\left[\begin{array}{cc}0.17 & 0.33 \\ 0.33 & -0.33\end{array}\right]-\lambda \left[\begin{array}{cc}1 & 0 \\0 & 1\end{array}\right]\right|
+\end{equation}
+\begin{equation}
+\left|\left[\begin{array}{cc}0.17-\lambda & 0.33 \\ 0.33 & -0.33-\lambda\end{array}\right]\right|
+\end{equation}
+\begin{equation}
+\left(\left(0.17 - \lambda \right) \times \left(-0.33- \lambda \right)\right) - \left(0.33 \times 0.33\right)
+\end{equation}
+\begin{equation}
+\left(\left(0.17 - \lambda \right) \times \left(-0.33- \lambda \right)\right) - 0.1089
+\end{equation}
+\begin{equation}
+-0.0561 + 0.16\lambda + \lambda^2 - 0.1089
+\end{equation}
+\begin{equation}
+\lambda^2 + 0.16\lambda - 0.165 = 0
+\end{equation}
+\begin{equation}
+\left(\lambda^2 + 0.16\lambda - 0.165\right) \times 1000 = 0 \times 1000
+\end{equation}
+\begin{equation}
+1000\lambda ^2 + 160\lambda - 165=0
+\end{equation}
+For $a=1000$, $b=160$, $c=-165$:
+\begin{equation}
+\lambda = \frac{-160\pm\sqrt{160^2-4 \times 1000\left(-165\right)}}{2 \times 1000}
+\end{equation}
+\begin{equation}
+\lambda_{1} = \frac{-160+\sqrt{160^2-4 \times 1000\left(-165\right)}}{2 \times 1000} = \frac{\sqrt{1714}-8}{100} = 0.33
+\end{equation}
+\begin{equation}
+\lambda_{2} = \frac{-160-\sqrt{160^2-4 \times 1000\left(-165\right)}}{2 \times 1000} = -\frac{8 + \sqrt{1714}}{100} = -0.5
+\end{equation}
+The eigenvalues are: $\left[\begin{array}{cc} 0.33 & -0.55 \end{array}\right]$
+
+Solving for $\lambda = 0.33$
+\begin{equation}
+\left[\begin{array}{cc}0.17 & 0.33 \\ 0.33 & -0.33\end{array}\right] - 0.33 \left[\begin{array}{cc}1 & 0 \\0 & 1\end{array}\right] = \left[\begin{array}{cc}-0.16 & 0.33 \\ 0.33 & -0.66\end{array}\right]
+\end{equation}
+\begin{equation}
+\left[\begin{array}{cc}-0.16 & 0.33 \\ 0.33 & -0.66\end{array}\right]\left[\begin{array}{c}x\\y\end{array}\right] = \left[\begin{array}{c}0\\0\end{array}\right]
+\end{equation}
+\begin{equation}
+\left[\begin{array}{cc}0.33 & -0.66 \\ 0 & 0\end{array}\right]\left[\begin{array}{c}x\\y\end{array}\right] = \left[\begin{array}{c}0\\0\end{array}\right]
+\end{equation}
+\begin{equation}
+\left[\begin{array}{cc} 1 & -2.01 \\ 0 & 0\end{array}\right]\left[\begin{array}{c}x\\y\end{array}\right] = \left[\begin{array}{c}0\\0\end{array}\right]
+\end{equation}
+\begin{equation}
+x - 2.01 y = 0
+\end{equation}
+Setting $x = 2.01$ then the eigenvalues for $\lambda = 0.3$ = $\left[\begin{array}{cc}2.01 &  1\end{array}\right]$
+\begin{equation}
+\left[\begin{array}{cc}2.01 &  1\end{array}\right]\left[\begin{array}{c}2.01 \\  1\end{array}\right] = 5.04
+\end{equation}
+The normalized eigenvalues for $\lambda = 0.3$ = $\left[\begin{array}{cc}\frac{2.01}{\sqrt{5.04}} &  \frac{1}{\sqrt{5.04}}\end{array}\right] = \left[\begin{array}{cc}0.895 & 0.445\end{array}\right]$
+
+Solving for $\lambda = -0.5$
+\begin{equation}
+\left[\begin{array}{cc}0.17 & 0.33 \\ 0.33 & -0.33\end{array}\right] - -0.5 \left[\begin{array}{cc}1 & 0 \\0 & 1\end{array}\right]
+\end{equation}
+\begin{equation}
+\left[\begin{array}{cc}0.66 & 0.33 \\ 0.33 & 0.16\end{array}\right]\left[\begin{array}{c}x\\y\end{array}\right] = \left[\begin{array}{c}0\\0\end{array}\right]
+\end{equation}
+\begin{equation}
+\left[\begin{array}{cc}0.66 & 0.33 \\ 0 & 0\end{array}\right]\left[\begin{array}{c}x\\y\end{array}\right] = \left[\begin{array}{c}0\\0\end{array}\right]
+\end{equation}
+\begin{equation}
+\left[\begin{array}{cc} 1 & 0.5 \\ 0 & 0\end{array}\right]\left[\begin{array}{c}x\\y\end{array}\right] = \left[\begin{array}{c}0\\0\end{array}\right]
+\end{equation}
+\begin{equation}
+x + 0.5 y = 0
+\end{equation}
+Setting $x = -0.5$ then the eigenvalues for $\lambda = 0.3$ = $\left[\begin{array}{cc}-0.5 &  1\end{array}\right]$
+\begin{equation}
+\left[\begin{array}{cc}-0.5 &  1\end{array}\right]\left[\begin{array}{c}-0.5 \\  1\end{array}\right] = 1.25
+\end{equation}
+The normalized eigenvalues for $\lambda = 0.3$ = $\left[\begin{array}{cc}\frac{-0.5}{\sqrt{1.25}} &  \frac{1}{\sqrt{1.25}}\end{array}\right] = \left[\begin{array}{cc}-0.445 & 0.895\end{array}\right]$
 \end{enumerate}
 \item Consider the matrices
 These matrices are identical except for a small difference in the (2, 2) position. Also, the columns of A and B are nearly linearly dependent. Show that A-1 $\approx$ (-3)B-1. So, small changes - perhaps due to rounding - can result in substantially different inverses.
