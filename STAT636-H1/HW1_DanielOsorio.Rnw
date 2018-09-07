@@ -206,8 +206,8 @@ tr\left(\left[\begin{array}{cc}2 & 2 \\ 2 & -1\end{array}\right]\right) = 3 + -2
 \begin{equation}
 1 = 1
 \end{equation}
-\item Is \textbf{A} orthogonal? Why or why not?
-\item Is \textbf{A} positive definite? Why or why not?
+\item Is \textbf{A} orthogonal? Why or why not? \emph{No, because} \textbf{A}'\textbf{A} $\neq$ \textbf{I}
+\item Is \textbf{A} positive definite? Why or why not? \textbf{A} \emph{is not positive definite because their eigenvalues are not all positive.}
 \item Find \textbf{A}$^{-1}$ and determine its eigenvalues and normalized eigenvectors.
 \begin{equation}
 \left[\begin{array}{cc}2 & 2 \\ 2 & -1\end{array}\right]^{-1} = \frac{1}{\left|\left[\begin{array}{cc}2 & 2 \\ 2 & -1\end{array}\right]\right|}\left[\begin{array}{cc}-1 & -2 \\ -2 & 2\end{array}\right]
