@@ -317,7 +317,7 @@ These matrices are identical except for a small difference in the (2, 2) positio
 \frac{1}{\left|\left[ \begin{array}{cc}4.000 & 4.001 \\4.001 & 4.002\end{array} \right]\right|}\left[ \begin{array}{cc}4.002 & -4.001 \\-4.001 & 4.000\end{array} \right] = -3\times\left[\frac{1}{\left|\left[ \begin{array}{cc}4.000 & 4.001 \\4.001 & 4.002001\end{array} \right]\right|}\left[ \begin{array}{cc}4.002001 & -4.001 \\-4.001 & 4.000 \end{array} \right]\right]
 \end{equation}
 \begin{equation}
-\frac{1}{-0.000001}\left[ \begin{array}{cc}4.002 & -4.001 \\-4.001 & 4.000\end{array} \right] = -3\times\left[\frac{1}{0.000003}\left[ \begin{array}{cc}4.002001 & -4.001 \\-4.001 & 4.000 \end{array} \right]\right]
+\frac{1}{-0.000001}\times\left[ \begin{array}{cc}4.002 & -4.001 \\-4.001 & 4.000\end{array} \right] = -3\times\left[\frac{1}{0.000003}\times\left[ \begin{array}{cc}4.002001 & -4.001 \\-4.001 & 4.000 \end{array} \right]\right]
 \end{equation}
 \begin{equation}
 -1000000 \times \left[ \begin{array}{cc}4.002 & -4.001 \\-4.001 & 4.000\end{array} \right] = -1000000 \times \left[ \begin{array}{cc}4.002001 & -4.001 \\-4.001 & 4.000 \end{array} \right]
@@ -326,5 +326,10 @@ These matrices are identical except for a small difference in the (2, 2) positio
 \left[ \begin{array}{cc}-4002000 & 4001000 \\4001000 & -4000000\end{array} \right] = \left[ \begin{array}{cc}-4002001 & 4001000 \\4001000 & -4000000 \end{array} \right]
 \end{equation}
 \item Derive expressions for the means and variances of the following linear combinations in terms of the means and covariances of the random variables $X_{1}$, $X_{2}$, and $X_{3}$.
+\begin{enumerate}
+\item $2X_{1} - X_{2}$
+\item $X_{1} +X_{2}-2X_{3}$
+\item $4X_{1} - 3X_{2}$ if $X_{1}$ and $X_{2}$ are independent (so, $\sigma_{12}$ = 0)
+\end{enumerate}
 \end{enumerate}
 \end{document}
