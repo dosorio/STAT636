@@ -1,6 +1,6 @@
 \documentclass[12pt,a4paper]{paper}
 \usepackage[utf8]{inputenc}
-\usepackage[spanish]{babel}
+\usepackage[english]{babel}
 \usepackage{amsmath}
 \usepackage{enumitem}
 \usepackage{amsfonts}
@@ -295,13 +295,35 @@ Solving for $\lambda = -0.5$
 \begin{equation}
 x + 0.5 y = 0
 \end{equation}
-Setting $x = -0.5$ then the eigenvalues for $\lambda = 0.3$ = $\left[\begin{array}{cc}-0.5 &  1\end{array}\right]$
+Setting $x = -0.5$ then the eigenvalues for $\lambda = 0.3$ are = $\left[\begin{array}{cc}-0.5 &  1\end{array}\right]$
 \begin{equation}
 \left[\begin{array}{cc}-0.5 &  1\end{array}\right]\left[\begin{array}{c}-0.5 \\  1\end{array}\right] = 1.25
 \end{equation}
-The normalized eigenvalues for $\lambda = 0.3$ = $\left[\begin{array}{cc}\frac{-0.5}{\sqrt{1.25}} &  \frac{1}{\sqrt{1.25}}\end{array}\right] = \left[\begin{array}{cc}-0.445 & 0.895\end{array}\right]$
+The normalized eigenvalues for $\lambda = 0.3$ are = $\left[\begin{array}{cc}\frac{-0.5}{\sqrt{1.25}} &  \frac{1}{\sqrt{1.25}}\end{array}\right] = \left[\begin{array}{cc}-0.445 & 0.895\end{array}\right]$
 \end{enumerate}
-\item Consider the matrices
-These matrices are identical except for a small difference in the (2, 2) position. Also, the columns of A and B are nearly linearly dependent. Show that A-1 $\approx$ (-3)B-1. So, small changes - perhaps due to rounding - can result in substantially different inverses.
+\item Consider the matrices \[ \textbf{A}= \left[ \begin{array}{cc}
+4.000 & 4.001 \\
+4.001 & 4.002
+\end{array} \right]
+\text{ and } 
+\textbf{B}=\left[ \begin{array}{cc}
+4.000 & 4.001 \\
+4.001 & 4.002001
+\end{array} \right]
+\]
+These matrices are identical except for a small difference in the (2, 2) position. Also, the columns of \textbf{A} and \textbf{B} are nearly linearly dependent. Show that \textbf{A}$^{-1}$ $\approx$ (-3)\textbf{B}$^{-1}$. So, small changes - perhaps due to rounding - can result in substantially different inverses.
+\begin{equation}
+\frac{1}{\left|\left[ \begin{array}{cc}4.000 & 4.001 \\4.001 & 4.002\end{array} \right]\right|}\left[ \begin{array}{cc}4.002 & -4.001 \\-4.001 & 4.000\end{array} \right] = -3\times\left[\frac{1}{\left|\left[ \begin{array}{cc}4.000 & 4.001 \\4.001 & 4.002001\end{array} \right]\right|}\left[ \begin{array}{cc}4.002001 & -4.001 \\-4.001 & 4.000 \end{array} \right]\right]
+\end{equation}
+\begin{equation}
+\frac{1}{-0.000001}\left[ \begin{array}{cc}4.002 & -4.001 \\-4.001 & 4.000\end{array} \right] = -3\times\left[\frac{1}{0.000003}\left[ \begin{array}{cc}4.002001 & -4.001 \\-4.001 & 4.000 \end{array} \right]\right]
+\end{equation}
+\begin{equation}
+-1000000 \times \left[ \begin{array}{cc}4.002 & -4.001 \\-4.001 & 4.000\end{array} \right] = -1000000 \times \left[ \begin{array}{cc}4.002001 & -4.001 \\-4.001 & 4.000 \end{array} \right]
+\end{equation}
+\begin{equation}
+\left[ \begin{array}{cc}-4002000 & 4001000 \\4001000 & -4000000\end{array} \right] = \left[ \begin{array}{cc}-4002001 & 4001000 \\4001000 & -4000000 \end{array} \right]
+\end{equation}
+\item Derive expressions for the means and variances of the following linear combinations in terms of the means and covariances of the random variables $X_{1}$, $X_{2}$, and $X_{3}$.
 \end{enumerate}
 \end{document}
