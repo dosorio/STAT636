@@ -174,6 +174,12 @@ The normalized eigenvectors for $\lambda = 3$ are $\left[\frac{-\frac{1}{2}}{\sq
 \end{multicols}
 \item Write the spectral decomposition of \textbf{A}.
 \begin{equation}
+\textbf{\text{A}} = \textbf{\text{CDC}'}
+\end{equation}
+\begin{equation}
+\left[\begin{array}{cc}2 & 2 \\ 2 & -1\end{array}\right] = \left[\begin{array}{cc}0.894 & 0.447 \\-0.447 & 0.894\end{array}\right]\left[\begin{array}{cc}3 & 0 \\ 0 & -2\end{array}\right]\left[\begin{array}{cc}0.894 & -0.447 \\ 0.447 & 0.894\end{array}\right]
+\end{equation}
+\begin{equation}
 \left[\begin{array}{cc}2 & 2 \\ 2 & -1\end{array}\right] = \left(3 \left[\begin{array}{c}0.894 \\ 0.447\end{array}\right]\left[\begin{array}{cc}0.894 & 0.447\end{array}\right]\right) + \left(-2 \left[\begin{array}{c}-0.447 \\ 0.894\end{array}\right]\left[\begin{array}{cc}-0.447 & 0.894\end{array}\right]\right)
 \end{equation}
 \begin{equation}
@@ -255,7 +261,7 @@ For $a=1000$, $b=160$, $c=-165$:
 \begin{equation}
 \lambda_{2} = \frac{-160-\sqrt{160^2-4 \times 1000\left(-165\right)}}{2 \times 1000} = -\frac{8 + \sqrt{1714}}{100} = -0.5
 \end{equation}
-The eigenvalues are: $\left[\begin{array}{cc} 0.33 & -0.55 \end{array}\right]$
+The eigenvalues are: $\left[\begin{array}{cc} 0.33 & -0.5 \end{array}\right]$
 
 Solving for $\lambda = 0.33$
 \begin{equation}
@@ -327,8 +333,37 @@ These matrices are identical except for a small difference in the (2, 2) positio
 \item Derive expressions for the means and variances of the following linear combinations in terms of the means and covariances of the random variables $X_{1}$, $X_{2}$, and $X_{3}$.
 \begin{enumerate}
 \item $2X_{1} - X_{2}$
+\begin{equation}
+E(2X_{1} - X_{2}) = 2\times E(X_{1}) - E(X_{2})
+\end{equation}
+\begin{equation}
+Var(2X_{1} - X_{2}) = 2^2 \times Var(X1) + Var(X2) - 2 \times 2 \times Cov(X_{1},X_{2})
+\end{equation}
+\begin{equation}
+\begin{split}
+Var(2X_{1} - X_{2}) = 4 \times E((X1-E(X1))^2) + E((X2-E(X2))^2) \\- 4 \times (E((X1-E(X1))^2) \times E((X2-E(X2))^2))
+\end{split}
+\end{equation}
 \item $X_{1} +X_{2}-2X_{3}$
+\begin{equation}
+E(X_{1} +X_{2}-2X_{3}) = E(X_{1}) + E(X_{2}) - 2 \times E(X_{3})
+\end{equation}
+\begin{equation}
+\begin{split}
+Var(X_{1} +X_{2}-2X_{3}) = Var(Var(X_{1}) + Var(X_{2}) + 2 \times Cov(X_{1},X_{2}))\\ + 2^2 \times Var(X_{3}) \\ - 2 \times 2 \times Cov(Var(X_{1}) + Var(X_{2}) + 2 \times Cov(X_{1},X_{2}),X_{3})
+\end{split}
+\end{equation}
 \item $4X_{1} - 3X_{2}$ if $X_{1}$ and $X_{2}$ are independent (so, $\sigma_{12}$ = 0)
+\begin{equation}
+E(4X_{1} - 3X_{2}) = 4 \times E(X_{1}) - 3 \times E(X_{2})
+\end{equation}
+\begin{equation}
+Var(4X_{1} - 3X_{2}) = 4^2 \times Var(X_{1}) + 3^2 \times Var(X_{2})
+\end{equation}
+\begin{equation}
+Var(4X_{1} - 3X_{2}) = 16 \times E((X1-E(X1))^2) + 9 \times E((X2-E(X2))^2)
+\end{equation}
 \end{enumerate}
+\item Consider the random vector \textbf{X$'$} = $\left[X_{1},X_{2},X_{3},X_{4}\right]$ with mean vector $\mu'= \left[1,2,3,4\right]$ and covariance matrix \[\Sigma=\]
 \end{enumerate}
 \end{document}
