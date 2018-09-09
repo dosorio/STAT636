@@ -1,11 +1,11 @@
 \documentclass[12pt,a4paper]{paper}
 \usepackage[utf8]{inputenc}
-\usepackage[spanish]{babel}
+\usepackage[english]{babel}
 \usepackage{amsmath}
 \usepackage{enumitem}
 \usepackage{amsfonts}
 \usepackage{amssymb}
-\usepackage[left=2cm,right=2cm,top=2cm,bottom=2cm]{geometry}
+\usepackage[left=1cm,right=1cm,top=1.5cm,bottom=2cm]{geometry}
 \begin{document}
 \title{STAT636 - Homework 1\\\small{Daniel Osorio - dcosorioh@tamu.edu\\Department of Veterinary Integrative Biosciences\\Texas A\&M University}}
 \maketitle
