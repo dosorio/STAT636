@@ -320,16 +320,12 @@ The normalized eigenvalues for $\lambda = 0.3$ are = $\left[\begin{array}{cc}\fr
 \]
 These matrices are identical except for a small difference in the (2, 2) position. Also, the columns of \textbf{A} and \textbf{B} are nearly linearly dependent. Show that \textbf{A}$^{-1}$ $\approx$ (-3)\textbf{B}$^{-1}$. So, small changes - perhaps due to rounding - can result in substantially different inverses.
 \begin{equation}
-\frac{1}{\left|\left[ \begin{array}{cc}4.000 & 4.001 \\4.001 & 4.002\end{array} \right]\right|}\left[ \begin{array}{cc}4.002 & -4.001 \\-4.001 & 4.000\end{array} \right] = -3\times\left[\frac{1}{\left|\left[ \begin{array}{cc}4.000 & 4.001 \\4.001 & 4.002001\end{array} \right]\right|}\left[ \begin{array}{cc}4.002001 & -4.001 \\-4.001 & 4.000 \end{array} \right]\right]
-\end{equation}
-\begin{equation}
-\frac{1}{-0.000001}\times\left[ \begin{array}{cc}4.002 & -4.001 \\-4.001 & 4.000\end{array} \right] = -3\times\left[\frac{1}{0.000003}\times\left[ \begin{array}{cc}4.002001 & -4.001 \\-4.001 & 4.000 \end{array} \right]\right]
-\end{equation}
-\begin{equation}
--1000000 \times \left[ \begin{array}{cc}4.002 & -4.001 \\-4.001 & 4.000\end{array} \right] = -1000000 \times \left[ \begin{array}{cc}4.002001 & -4.001 \\-4.001 & 4.000 \end{array} \right]
-\end{equation}
-\begin{equation}
-\left[ \begin{array}{cc}-4002000 & 4001000 \\4001000 & -4000000\end{array} \right] = \left[ \begin{array}{cc}-4002001 & 4001000 \\4001000 & -4000000 \end{array} \right]
+\begin{split}
+\frac{1}{\left|\left[ \begin{array}{cc}4.000 & 4.001 \\4.001 & 4.002\end{array} \right]\right|}\left[ \begin{array}{cc}4.002 & -4.001 \\-4.001 & 4.000\end{array} \right] & = -3\times\left[\frac{1}{\left|\left[ \begin{array}{cc}4.000 & 4.001 \\4.001 & 4.002001\end{array} \right]\right|}\left[ \begin{array}{cc}4.002001 & -4.001 \\-4.001 & 4.000 \end{array} \right]\right]\\
+\frac{1}{-0.000001}\times\left[ \begin{array}{cc}4.002 & -4.001 \\-4.001 & 4.000\end{array} \right] & = -3\times\left[\frac{1}{0.000003}\times\left[ \begin{array}{cc}4.002001 & -4.001 \\-4.001 & 4.000 \end{array} \right]\right]\\
+-1000000 \times \left[ \begin{array}{cc}4.002 & -4.001 \\-4.001 & 4.000\end{array} \right] &= -1000000 \times \left[ \begin{array}{cc}4.002001 & -4.001 \\-4.001 & 4.000 \end{array} \right] \\
+\left[ \begin{array}{cc}-4002000 & 4001000 \\4001000 & -4000000\end{array} \right] &= \left[ \begin{array}{cc}-4002001 & 4001000 \\4001000 & -4000000 \end{array} \right]
+\end{split}
 \end{equation}
 \item Derive expressions for the means and variances of the following linear combinations in terms of the means and covariances of the random variables $X_{1}$, $X_{2}$, and $X_{3}$.
 \begin{enumerate}
@@ -338,11 +334,9 @@ These matrices are identical except for a small difference in the (2, 2) positio
 E(2X_{1} - X_{2}) = 2\times E(X_{1}) - E(X_{2})
 \end{equation}
 \begin{equation}
-Var(2X_{1} - X_{2}) = 2^2 \times Var(X1) + Var(X2) - 2 \times 2 \times Cov(X_{1},X_{2})
-\end{equation}
-\begin{equation}
 \begin{split}
-Var(2X_{1} - X_{2}) = 4 \times E((X1-E(X1))^2) + E((X2-E(X2))^2) \\- 4 \times (E((X1-E(X1))^2) \times E((X2-E(X2))^2))
+Var(2X_{1} - X_{2})&= 2^2 \times Var(X1) + Var(X2) - 2 \times 2 \times Cov(X_{1},X_{2})\\
+&= 4 \times E((X1-E(X1))^2) + E((X2-E(X2))^2) \\&- 4 \times \sum{((X1-E(X1)) \times (X2-E(X2)))}
 \end{split}
 \end{equation}
 \item $X_{1} +X_{2}-2X_{3}$
@@ -359,21 +353,61 @@ Var(X_{1} +X_{2}-2X_{3}) = (Var(X_{1}) + Var(X_{2}) + 2 \times Cov(X_{1},X_{2}))
 E(4X_{1} - 3X_{2}) = 4 \times E(X_{1}) - 3 \times E(X_{2})
 \end{equation}
 \begin{equation}
-Var(4X_{1} - 3X_{2}) = 4^2 \times Var(X_{1}) + 3^2 \times Var(X_{2})
-\end{equation}
-\begin{equation}
-Var(4X_{1} - 3X_{2}) = 16 \times E((X1-E(X1))^2) + 9 \times E((X2-E(X2))^2)
+\begin{split}
+Var(4X_{1} - 3X_{2}) &= 4^2 \times Var(X_{1}) + 3^2 \times Var(X_{2})\\
+&= 16 \times E((X1-E(X1))^2) + 9 \times E((X2-E(X2))^2)
+\end{split}
 \end{equation}
 \end{enumerate}
 \item Consider the random vector \textbf{X$'$} = $\left[X_{1},X_{2},X_{3},X_{4}\right]$ with mean vector $\mu'= \left[1,2,3,4\right]$ and covariance matrix \[\Sigma=\left[\begin{array}{cccc}
 4 & 0 & 3 & 1 \\ 0 & 1 & 1 & 0 \\ 3 & 1 & 9 & -2 \\ 1 & 0 & -2 & 4
-\end{array}\right]\] Partition \textbf{X} as \[X=\left[\begin{array}{c}X_{1}\\X_{2}\\\hdashline[2pt/2pt]X_{3}\\X_{4}\end{array}\right] = \left[\begin{array}{c}X^{(1)}\\\hdashline[2pt/2pt]X^{(2)}\end{array}\right]\] Let \[A = \left[\begin{array}{cc}2 & 1\end{array}\right] \text{ and } B = \left[\begin{array}{cc}-1 & -2 \\ 2 & 1\end{array}\right]\] and consider the linear combinations AX$^{(1)}$ and BX$^{(2)}$. Find the following:
+\end{array}\right]\] Partition \textbf{X} as \[X=\left[\begin{array}{c}X_{1}\\X_{2}\\\hdashline[2pt/2pt]X_{3}\\X_{4}\end{array}\right] = \left[\begin{array}{c}\textbf{X}^{(1)}\\\hdashline[2pt/2pt]\textbf{X}^{(2)}\end{array}\right]\] Let \[A = \left[\begin{array}{cc}2 & 1\end{array}\right] \text{ and } B = \left[\begin{array}{cc}-1 & -2 \\ 2 & 1\end{array}\right]\] and consider the linear combinations AX$^{(1)}$ and BX$^{(2)}$. Find the following:
 \begin{enumerate}
-\item $E(X_{1})$
-\item $E(BX^{(2)})$
-\item $Cov(AX^{(1)})$
-\item $Cov(X^{(1)},X^{(2)})$
-\item $Cov(AX^{(1)},BX^{(2)})$
+\item $E(\textbf{X}_{1})$
+\begin{equation}
+\begin{split}
+E(\textbf{X}_{1}) &= E(\left[\begin{array}{cc}1 & 2\end{array}\right])\\
+& = \frac{1 + 2}{2}\\
+& = 1.5
+\end{split}
+\end{equation}
+\item $E(\textbf{BX}^{(2)})$
+\begin{equation}
+\begin{split}
+E(\textbf{BX}^{(2)}) &= E\left(\left[\begin{array}{cc}-1 & -2 \\ 2 & 1\end{array}\right]\left[\begin{array}{c}3 \\ 4\end{array}\right]\right)\\
+& = E\left(\left[\begin{array}{c}(-1 \times 3) + (-2 \times 4) \\ (2 \times 3) + (1 \times 4)\end{array}\right]\right)\\
+& = E\left(\left[\begin{array}{c}-11 \\ 10\end{array}\right]\right)\\
+& = \frac{-11 + 10}{2}\\
+& = -0.5
+\end{split}
+\end{equation}
+\item $Cov(\textbf{AX}^{(1)})$
+\begin{equation}
+\begin{split}
+Cov(\textbf{AX}^{(1)}) &= \textbf{A}\times Cov(\textbf{X}^{(1)})\\
+&= \left[\begin{array}{cc}2 & 1\end{array}\right] \times 0\\
+&= 0
+\end{split}
+\end{equation}
+\item $Cov(\textbf{X}^{(1)},\textbf{X}^{(2)})$
+\begin{equation}
+\begin{split}
+Cov(\textbf{X}^{(1)},\textbf{X}^{(2)}) &= \sum{(\textbf{X}^{(1)} - E(\textbf{X}^{(1)}))(\textbf{X}^{(2)} - E(\textbf{X}^{(2)}))}\\
+&= \sum{(\left[\begin{array}{cc}1 & 2\end{array}\right] - 1.5)(\left[\begin{array}{cc}3 & 4\end{array}\right] - 3.5)}\\
+&= \left[\begin{array}{cc}-0.5 & 0.5\end{array}\right] \times \left[\begin{array}{cc}-0.5 & 0.5\end{array}\right]\\
+&= 0.5
+\end{split}
+\end{equation}
+\item $Cov(\textbf{AX}^{(1)},\textbf{BX}^{(2)})$
+\begin{equation}
+\begin{split}
+Cov(\textbf{AX}^{(1)},\textbf{BX}^{(2)}) &= \textbf{AB} \times Cov(\textbf{X}^{(1)},\textbf{X}^{(2)})\\
+&= \left[\begin{array}{cc}2 & 1\end{array}\right]\left[\begin{array}{cc}-1 & -2 \\ 2 & 1\end{array}\right]\times Cov(\textbf{X}^{(1)},\textbf{X}^{(2)})\\
+&= -3 \times Cov(\textbf{X}^{(1)},\textbf{X}^{(2)})\\
+&= -3 \times 0.5\\
+&= -1.5
+\end{split}
+\end{equation}
 \end{enumerate}
 \end{enumerate}
 \end{document}
