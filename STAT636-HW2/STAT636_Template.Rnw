@@ -1,0 +1,43 @@
+\documentclass[12pt,a4paper]{paper}
+\usepackage[utf8]{inputenc}
+\usepackage[english]{babel}
+\usepackage{amsmath}
+\usepackage{enumitem}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage[left=1cm,right=1cm,top=1.5cm,bottom=2cm]{geometry}
+\begin{document}
+\title{STAT636 - Homework 2\\\small{Daniel Osorio - dcosorioh@tamu.edu\\Department of Veterinary Integrative Biosciences\\Texas A\&M University}}
+\maketitle
+\SweaveOpts{concordance=TRUE}
+\begin{enumerate}
+\item Find the maximum likelihood estimates of the 2 $\times$ 1 mean vector $\mu$ and the 2 $\times$ 2 covariance matrix $\Sigma$ based on the random sample
+\[X = \left[\begin{array}{cc}3 & 6\\4 & 4\\5 & 7\\4 & 7\end{array}\right]\]
+\item Let X$_{1}$, X$_{2}$, \dots, X$_{60}$ be a random sample of size n = 60 from a N$_{6}$($\mu$, $\Sigma$) population. Specify each of the following.
+\begin{enumerate}
+\item The distribution of $(X_{1} - \mu)'\Sigma^{-1}(X_{1} - \mu)$.
+\item The distributions of $\bar{X}$ and $\sqrt{n}(\bar{X} - \mu)$.
+\item The distribution of $n(\bar{X}-\mu)'\Sigma^{-1}(\bar{X} - \mu)$
+\item The approximate distribution of $n(\bar{X}-\mu)'S^{-1}(\bar{X} - \mu)$
+\end{enumerate}
+\item Consider the used car data. For each of 10 used cars, we have the numeric variables Age
+(age of the car) and Price (sale price of car, in \$1,000s)
+\begin{enumerate}
+\item Determine the power transformation $\hat{\lambda}_{1}$ that makes the $x_{1}$ values approximately normal. Construct a Q-Q plot for the transformed data.
+\item Determine the power transformation $\hat{\lambda}_{2}$ that makes the $x_{2}$ values approximately normal. Construct a Q-Q plot for the transformed data.
+\item Determine the power transformations $\hat{\lambda}' = \left[\hat{\lambda}_{1},\hat{\lambda}_{2}\right]$ that make the $\left[x_{1},x_{2}\right]$ values approximately multivariate normal. Compare the results with those from above.
+\end{enumerate}
+\item Consider the \texttt{Advertising} data. For each of 200 strategies, we have three numeric variables that influence the sales: \texttt{TV}, \texttt{radio}, and \texttt{Newspaper}.
+\begin{enumerate}
+\item Construct univariate Q-Q plots for each of the three variables. Also make the three
+pairwise scatterplots. Does the multivariate normal assumption seem reasonable?
+\item Determine the 95\% confidence ellipsoid for $\mu$. Where is it centered? What are its axes and corresponding half-lengths?
+\item Compute 95\% T2 simultaneous confidence intervals for the three mean components.
+\item Compute 95\% Bonferroni simultaneous confidence intervals for the three mean components.
+\item Carry out a Hotelling's $T^{2}$ test of the null hypothesis H0 : $\mu' = \left[150.0,20.0,30.0\right]$ at $\alpha = 0.05$. What is the test statistic, critical value, and the p-value? What is your conclusion regarding H0?
+\item Is $\mu' = [150.0, 20.0, 30.0]$ inside the 95\% confidence ellipse you computed in part (b)? Is this consistent with your findings in part (e)? Hint: It should be.
+\item Use the bootstrap to test the same null hypothesis as in part (e), now using this as your test statistic
+\[\Lambda = \left(\frac{\left|S\right|}{\left|S_{0}\right|}\right)^{n/2},\]where \[S = \frac{1}{n-1}\sum_{j=1}^{n}(x_{j}-\bar{x})(x_{j}-\bar{x})'\] is the sample covariance matrix, and \[S_{0} = \frac{1}{n-1}\sum_{j=1}^{n}(x_{j}-\bar{x})(x_{j}-\bar{x})'\] is the sample covariance matrix under the assumption that $H_{0}$ is true. So that all our answers match, first do \texttt{set.seed(2)}, and use $B=500$ bootstrap iterations. What is the p-value?
+\end{enumerate}
+\end{enumerate}
+\end{document}
