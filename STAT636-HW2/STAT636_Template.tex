@@ -14,6 +14,27 @@
 \begin{enumerate}
 \item Find the maximum likelihood estimates of the 2 $\times$ 1 mean vector $\mu$ and the 2 $\times$ 2 covariance matrix $\Sigma$ based on the random sample
 \[X = \left[\begin{array}{cc}3 & 6\\4 & 4\\5 & 7\\4 & 7\end{array}\right]\]
+\begin{Schunk}
+\begin{Sinput}
+> X <- matrix(data = c(3,6,4,4,5,7,4,7), ncol = 2, byrow = TRUE)
+> n <- nrow(X)
+> X_hat <- 1/n * rep(1,n) %*% X
+> X_hat
+\end{Sinput}
+\begin{Soutput}
+     [,1] [,2]
+[1,]    4    6
+\end{Soutput}
+\begin{Sinput}
+> S_hat <- 1/n * (t(X) - drop(X_hat)) %*% t(t(X) - drop(X_hat))
+> S_hat
+\end{Sinput}
+\begin{Soutput}
+     [,1] [,2]
+[1,] 0.50 0.25
+[2,] 0.25 1.50
+\end{Soutput}
+\end{Schunk}
 \item Let X$_{1}$, X$_{2}$, \dots, X$_{60}$ be a random sample of size n = 60 from a N$_{6}$($\mu$, $\Sigma$) population. Specify each of the following.
 \begin{enumerate}
 \item The distribution of $(X_{1} - \mu)'\Sigma^{-1}(X_{1} - \mu)$.
