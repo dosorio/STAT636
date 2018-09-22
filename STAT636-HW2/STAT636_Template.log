@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.19 (TeX Live 2018) (preloaded format=pdflatex 2018.4.16)  22 SEP 2018 13:31
+This is pdfTeX, Version 3.14159265-2.6-1.40.19 (TeX Live 2018) (preloaded format=pdflatex 2018.4.16)  22 SEP 2018 16:29
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -525,32 +525,55 @@ File: t1aett.fd 1997/11/16 Font definitions for T1/aett.
 ) [1
 
 
-{/usr/local/texlive/2018/texmf-var/fonts/map/pdftex/updmap/pdftex.map}] [2]
-(./STAT636_Template.aux) ) 
+{/usr/local/texlive/2018/texmf-var/fonts/map/pdftex/updmap/pdftex.map}]
+<STAT636_Template-003.pdf, id=16, 433.62pt x 144.54pt>
+File: STAT636_Template-003.pdf Graphic file (type pdf)
+<use STAT636_Template-003.pdf>
+Package pdftex.def Info: STAT636_Template-003.pdf  used on input line 73.
+(pdftex.def)             Requested size: 432.48355pt x 144.1691pt.
+<STAT636_Template-004.pdf, id=17, 433.62pt x 144.54pt>
+File: STAT636_Template-004.pdf Graphic file (type pdf)
+<use STAT636_Template-004.pdf>
+Package pdftex.def Info: STAT636_Template-004.pdf  used on input line 92.
+(pdftex.def)             Requested size: 432.48355pt x 144.1691pt.
+ [2 <./STAT636_Template-003.pdf> <./STAT636_Template-004.pdf>]
+<STAT636_Template-007.pdf, id=34, 433.62pt x 144.54pt>
+File: STAT636_Template-007.pdf Graphic file (type pdf)
+<use STAT636_Template-007.pdf>
+Package pdftex.def Info: STAT636_Template-007.pdf  used on input line 124.
+(pdftex.def)             Requested size: 432.48355pt x 144.1691pt.
+<STAT636_Template-008.pdf, id=35, 433.62pt x 216.81pt>
+File: STAT636_Template-008.pdf Graphic file (type pdf)
+<use STAT636_Template-008.pdf>
+Package pdftex.def Info: STAT636_Template-008.pdf  used on input line 131.
+(pdftex.def)             Requested size: 432.48355pt x 216.25368pt.
+ [3 <./STAT636_Template-007.pdf> <./STAT636_Template-008.pdf>] [4] (./STAT636_T
+emplate.aux) ) 
 Here is how much of TeX's memory you used:
- 5064 strings out of 492649
- 70113 string characters out of 6129622
+ 5088 strings out of 492649
+ 70912 string characters out of 6129622
  146243 words of memory out of 5000000
- 8811 multiletter control sequences out of 15000+600000
- 31668 words of font info for 72 fonts, out of 8000000 for 9000
+ 8828 multiletter control sequences out of 15000+600000
+ 34145 words of font info for 75 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 41i,7n,25p,489b,336s stack positions out of 5000i,500n,10000p,200000b,80000s
-</usr/local/texlive/2018/texmf-dist/fonts/type1/publi
-c/amsfonts/cm/cmex10.pfb></usr/local/texlive/2018/texmf-dist/fonts/type1/public
-/amsfonts/cm/cmmi12.pfb></usr/local/texlive/2018/texmf-dist/fonts/type1/public/
-amsfonts/cm/cmmi8.pfb></usr/local/texlive/2018/texmf-dist/fonts/type1/public/am
-sfonts/cm/cmr10.pfb></usr/local/texlive/2018/texmf-dist/fonts/type1/public/amsf
-onts/cm/cmr12.pfb></usr/local/texlive/2018/texmf-dist/fonts/type1/public/amsfon
-ts/cm/cmr8.pfb></usr/local/texlive/2018/texmf-dist/fonts/type1/public/amsfonts/
-cm/cmsltt10.pfb></usr/local/texlive/2018/texmf-dist/fonts/type1/public/amsfonts
-/cm/cmssbx10.pfb></usr/local/texlive/2018/texmf-dist/fonts/type1/public/amsfont
-s/cm/cmsy10.pfb></usr/local/texlive/2018/texmf-dist/fonts/type1/public/amsfonts
-/cm/cmsy8.pfb></usr/local/texlive/2018/texmf-dist/fonts/type1/public/amsfonts/c
-m/cmtt12.pfb>
-Output written on STAT636_Template.pdf (2 pages, 118133 bytes).
+ 41i,7n,25p,489b,579s stack positions out of 5000i,500n,10000p,200000b,80000s
+</usr/local/texlive/2018/texmf-dist/fonts/type1/public/amsfonts/c
+m/cmex10.pfb></usr/local/texlive/2018/texmf-dist/fonts/type1/public/amsfonts/cm
+/cmmi12.pfb></usr/local/texlive/2018/texmf-dist/fonts/type1/public/amsfonts/cm/
+cmmi8.pfb></usr/local/texlive/2018/texmf-dist/fonts/type1/public/amsfonts/cm/cm
+r10.pfb></usr/local/texlive/2018/texmf-dist/fonts/type1/public/amsfonts/cm/cmr1
+2.pfb></usr/local/texlive/2018/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.p
+fb></usr/local/texlive/2018/texmf-dist/fonts/type1/public/amsfonts/cm/cmsltt10.
+pfb></usr/local/texlive/2018/texmf-dist/fonts/type1/public/amsfonts/cm/cmssbx10
+.pfb></usr/local/texlive/2018/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.
+pfb></usr/local/texlive/2018/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pf
+b></usr/local/texlive/2018/texmf-dist/fonts/type1/public/amsfonts/cm/cmti12.pfb
+></usr/local/texlive/2018/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt12.pfb>
+
+Output written on STAT636_Template.pdf (4 pages, 259357 bytes).
 PDF statistics:
- 56 PDF objects out of 1000 (max. 8388607)
- 39 compressed objects within 1 object stream
+ 93 PDF objects out of 1000 (max. 8388607)
+ 65 compressed objects within 1 object stream
  0 named destinations out of 1000 (max. 500000)
- 5 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 25 words of extra memory for PDF output out of 10000 (max. 10000000)
 

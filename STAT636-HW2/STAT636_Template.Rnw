@@ -37,8 +37,32 @@ used_car <- read.csv("used_cars.csv")
 @
 \begin{enumerate}
 \item Determine the power transformation $\hat{\lambda}_{1}$ that makes the $x_{1}$ values approximately normal. Construct a Q-Q plot for the transformed data.
+<<fig=TRUE, height=2>>=
+lambda <- as.numeric(car::powerTransform(used_car[,1])$lambda)
+lambda
+par(mfrow = c(1,2), mar=c(2.5,2.5,1,1))
+qqnorm(used_car[,1], main = "Original", las=1)
+qqline(used_car[,1])
+transformed <- ((used_car[,1] ^ lambda) - 1)/lambda
+qqnorm(transformed, main = "Transformed", las=1)
+qqline(transformed)
+@
 \item Determine the power transformation $\hat{\lambda}_{2}$ that makes the $x_{2}$ values approximately normal. Construct a Q-Q plot for the transformed data.
+<<fig=TRUE, height=2>>=
+lambda <- as.numeric(car::powerTransform(used_car[,2])$lambda)
+lambda
+par(mfrow = c(1,2),mar=c(2.5,2.5,1,1))
+qqnorm(used_car[,2], main = "Original", las=1)
+qqline(used_car[,2])
+transformed <- ((used_car[,2] ^ lambda) - 1)/lambda
+qqnorm(transformed, main = "Transformed", las=1)
+qqline(transformed)
+@
 \item Determine the power transformations $\hat{\lambda}' = \left[\hat{\lambda}_{1},\hat{\lambda}_{2}\right]$ that make the $\left[x_{1},x_{2}\right]$ values approximately multivariate normal. Compare the results with those from above.
+<<>>=
+car::powerTransform(used_car)
+@
+\emph{The values of $\lambda$ required to approximate to the multinormal distribution are different to those computed independently for each variable.}
 \end{enumerate}
 \item Consider the \texttt{advertising} data. For each of 200 strategies, we have three numeric variables that influence the sales: \texttt{TV}, \texttt{radio}, and \texttt{Newspaper}.
 <<>>=
@@ -47,6 +71,19 @@ advertising <- read.csv("advertising.csv", row.names = 1)
 \begin{enumerate}
 \item Construct univariate Q-Q plots for each of the three variables. Also make the three
 pairwise scatterplots. Does the multivariate normal assumption seem reasonable?
+<<fig=TRUE, height=2>>=
+par(mfrow = c(1,3), mar=c(2.5,2.5,1,1))
+out <- sapply(colnames(advertising[,1:3]), function(x){
+  qqnorm(advertising[,x], main = paste0("Q-Q Plot of ",x), las = 1)
+  qqline(advertising[,x])
+})
+@
+<<fig=TRUE, height=3>>=
+par(mar=c(1,1,1,1))
+plot(advertising[,1:3], las = 1)
+@
+
+\emph{The multivariable normal distribution does not look reasonable for this dataset because of not all the variables are independently normal}
 \item Determine the 95\% confidence ellipsoid for $\mu$. Where is it centered? What are its axes and corresponding half-lengths?
 \item Compute 95\% T2 simultaneous confidence intervals for the three mean components.
 \item Compute 95\% Bonferroni simultaneous confidence intervals for the three mean components.
@@ -54,6 +91,9 @@ pairwise scatterplots. Does the multivariate normal assumption seem reasonable?
 \item Is $\mu' = [150.0, 20.0, 30.0]$ inside the 95\% confidence ellipse you computed in part (b)? Is this consistent with your findings in part (e)? Hint: It should be.
 \item Use the bootstrap to test the same null hypothesis as in part (e), now using this as your test statistic
 \[\Lambda = \left(\frac{\left|S\right|}{\left|S_{0}\right|}\right)^{n/2},\]where \[S = \frac{1}{n-1}\sum_{j=1}^{n}(x_{j}-\bar{x})(x_{j}-\bar{x})'\] is the sample covariance matrix, and \[S_{0} = \frac{1}{n-1}\sum_{j=1}^{n}(x_{j}-\bar{x})(x_{j}-\bar{x})'\] is the sample covariance matrix under the assumption that $H_{0}$ is true. So that all our answers match, first do \texttt{set.seed(2)}, and use $B=500$ bootstrap iterations. What is the p-value?
+<<>>=
+
+@
 \end{enumerate}
 \end{enumerate}
 \end{document}
