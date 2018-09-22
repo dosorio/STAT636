@@ -23,19 +23,27 @@ S_hat
 @
 \item Let X$_{1}$, X$_{2}$, \dots, X$_{60}$ be a random sample of size n = 60 from a N$_{6}$($\mu$, $\Sigma$) population. Specify each of the following.
 \begin{enumerate}
-\item The distribution of $(X_{1} - \mu)'\Sigma^{-1}(X_{1} - \mu)$.
+\item The distribution of $(X_{1} - \mu)'\Sigma^{-1}(X_{1} - \mu)$. \[(X_{1} - \mu)'\Sigma^{-1}(X_{1} - \mu) \sim \mathcal{X}^{2}_{6}\]
 \item The distributions of $\bar{X}$ and $\sqrt{n}(\bar{X} - \mu)$.
-\item The distribution of $n(\bar{X}-\mu)'\Sigma^{-1}(\bar{X} - \mu)$
+\[\bar{X} \sim \mathcal{N}_{6}\left(\mu, \frac{1}{60}\Sigma \right)\]
+\[\sqrt{n}(\bar{X} - \mu) \mathrel{\dot\sim} \mathcal{N}_{6}\left(0, \Sigma\right)\]
+\item The distribution of $n(\bar{X}-\mu)'\Sigma^{-1}(\bar{X} - \mu)$ \[n(\bar{X}-\mu)'\Sigma^{-1}(\bar{X} - \mu) \sim \mathcal{X}^{2}_{6}\]
 \item The approximate distribution of $n(\bar{X}-\mu)'S^{-1}(\bar{X} - \mu)$
+\[n(\bar{X}-\mu)'S^{-1}(\bar{X} - \mu) \mathrel{\dot\sim} \mathcal{X}^{2}_{6}\]
 \end{enumerate}
-\item Consider the used car data. For each of 10 used cars, we have the numeric variables Age
-(age of the car) and Price (sale price of car, in \$1,000s)
+\item Consider the \texttt{used\_car} data. For each of 10 used cars, we have the numeric variables Age (age of the car) and Price (sale price of car, in \$1,000s)
+<<>>=
+used_car <- read.csv("used_cars.csv")
+@
 \begin{enumerate}
 \item Determine the power transformation $\hat{\lambda}_{1}$ that makes the $x_{1}$ values approximately normal. Construct a Q-Q plot for the transformed data.
 \item Determine the power transformation $\hat{\lambda}_{2}$ that makes the $x_{2}$ values approximately normal. Construct a Q-Q plot for the transformed data.
 \item Determine the power transformations $\hat{\lambda}' = \left[\hat{\lambda}_{1},\hat{\lambda}_{2}\right]$ that make the $\left[x_{1},x_{2}\right]$ values approximately multivariate normal. Compare the results with those from above.
 \end{enumerate}
-\item Consider the \texttt{Advertising} data. For each of 200 strategies, we have three numeric variables that influence the sales: \texttt{TV}, \texttt{radio}, and \texttt{Newspaper}.
+\item Consider the \texttt{advertising} data. For each of 200 strategies, we have three numeric variables that influence the sales: \texttt{TV}, \texttt{radio}, and \texttt{Newspaper}.
+<<>>=
+advertising <- read.csv("advertising.csv", row.names = 1)
+@
 \begin{enumerate}
 \item Construct univariate Q-Q plots for each of the three variables. Also make the three
 pairwise scatterplots. Does the multivariate normal assumption seem reasonable?

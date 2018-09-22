@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.19 (TeX Live 2018) (preloaded format=pdflatex 2018.4.16)  22 SEP 2018 11:27
+This is pdfTeX, Version 3.14159265-2.6-1.40.19 (TeX Live 2018) (preloaded format=pdflatex 2018.4.16)  22 SEP 2018 13:31
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -529,7 +529,7 @@ File: t1aett.fd 1997/11/16 Font definitions for T1/aett.
 (./STAT636_Template.aux) ) 
 Here is how much of TeX's memory you used:
  5064 strings out of 492649
- 70080 string characters out of 6129622
+ 70113 string characters out of 6129622
  146243 words of memory out of 5000000
  8811 multiletter control sequences out of 15000+600000
  31668 words of font info for 72 fonts, out of 8000000 for 9000
@@ -547,7 +547,7 @@ cm/cmsltt10.pfb></usr/local/texlive/2018/texmf-dist/fonts/type1/public/amsfonts
 s/cm/cmsy10.pfb></usr/local/texlive/2018/texmf-dist/fonts/type1/public/amsfonts
 /cm/cmsy8.pfb></usr/local/texlive/2018/texmf-dist/fonts/type1/public/amsfonts/c
 m/cmtt12.pfb>
-Output written on STAT636_Template.pdf (2 pages, 115870 bytes).
+Output written on STAT636_Template.pdf (2 pages, 118133 bytes).
 PDF statistics:
  56 PDF objects out of 1000 (max. 8388607)
  39 compressed objects within 1 object stream
