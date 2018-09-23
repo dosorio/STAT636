@@ -10,7 +10,7 @@
 \begin{document}
 \title{STAT636 - Homework 2\\\small{Daniel Osorio - dcosorioh@tamu.edu\\Department of Veterinary Integrative Biosciences\\Texas A\&M University}}
 \maketitle
-\input{STAT636_Template-concordance}
+\input{HW2_DanielOsorio-concordance}
 \begin{enumerate}
 \item Find the maximum likelihood estimates of the 2 $\times$ 1 mean vector $\mu$ and the 2 $\times$ 2 covariance matrix $\Sigma$ based on the random sample
 \[X = \left[\begin{array}{cc}3 & 6\\4 & 4\\5 & 7\\4 & 7\end{array}\right]\]
@@ -43,7 +43,7 @@
 \[\sqrt{n}(\bar{X} - \mu) \mathrel{\dot\sim} \mathcal{N}_{6}\left(0, \Sigma\right)\]
 \item The distribution of $n(\bar{X}-\mu)'\Sigma^{-1}(\bar{X} - \mu)$ \[n(\bar{X}-\mu)'\Sigma^{-1}(\bar{X} - \mu) \sim \mathcal{X}^{2}_{6}\]
 \item The approximate distribution of $n(\bar{X}-\mu)'S^{-1}(\bar{X} - \mu)$
-\[n(\bar{X}-\mu)'S^{-1}(\bar{X} - \mu) \mathrel{\dot\sim} \mathcal{X}^{2}_{6}\]
+\[n(\bar{X}-\mu)'S^{-1}(\bar{X} - \mu) \mathrel{\dot\sim} \frac{354}{54}\mathcal{F}_{60,54}\]
 \end{enumerate}
 \item Consider the \texttt{used\_car} data. For each of 10 used cars, we have the numeric variables Age (age of the car) and Price (sale price of car, in \$1,000s)
 \begin{Schunk}
@@ -70,7 +70,7 @@
 > qqline(transformed)
 \end{Sinput}
 \end{Schunk}
-\includegraphics{STAT636_Template-003}
+\includegraphics{HW2_DanielOsorio-003}
 \item Determine the power transformation $\hat{\lambda}_{2}$ that makes the $x_{2}$ values approximately normal. Construct a Q-Q plot for the transformed data.
 \begin{Schunk}
 \begin{Sinput}
@@ -89,7 +89,7 @@
 > qqline(transformed)
 \end{Sinput}
 \end{Schunk}
-\includegraphics{STAT636_Template-004}
+\includegraphics{HW2_DanielOsorio-004}
 \item Determine the power transformations $\hat{\lambda}' = \left[\hat{\lambda}_{1},\hat{\lambda}_{2}\right]$ that make the $\left[x_{1},x_{2}\right]$ values approximately multivariate normal. Compare the results with those from above.
 \begin{Schunk}
 \begin{Sinput}
@@ -121,27 +121,166 @@ pairwise scatterplots. Does the multivariate normal assumption seem reasonable?
 + })
 \end{Sinput}
 \end{Schunk}
-\includegraphics{STAT636_Template-007}
+\includegraphics{HW2_DanielOsorio-007}
 \begin{Schunk}
 \begin{Sinput}
 > par(mar=c(1,1,1,1))
 > plot(advertising[,1:3], las = 1)
 \end{Sinput}
 \end{Schunk}
-\includegraphics{STAT636_Template-008}
+\includegraphics{HW2_DanielOsorio-008}
 
 \emph{The multivariable normal distribution does not look reasonable for this dataset because of not all the variables are independently normal}
-\item Determine the 95\% confidence ellipsoid for $\mu$. Where is it centered? What are its axes and corresponding half-lengths?
+\item Determine the 95\% confidence ellipsoid for $\mu$.
+\begin{Schunk}
+\begin{Sinput}
+> X_bar <- colMeans(advertising[,1:3])
+> alpha <- 0.05
+> S <- var(advertising[,1:3])
+> e <- eigen(S)
+> lambda <- e$values
+> e <- e$vectors
+> p <- ncol(advertising[,1:3])
+> n <- nrow(advertising[,1:3])
+> lb <- X_bar - abs(drop(sqrt(lambda) * sqrt(((p*(n-1))/(n*(n-p)))*
++                                    qf(1-alpha, df1 = p, df2 = (n-p)))) %*% e)
+> ub <- X_bar + abs(drop(sqrt(lambda) * sqrt(((p*(n-1))/(n*(n-p)))*
++                                    qf(1-alpha, df1 = p, df2 = (n-p)))) %*% e)
+> t(rbind(lb,ub))
+\end{Sinput}
+\begin{Soutput}
+          [,1]      [,2]
+[1,] 129.75061 164.33439
+[2,]  19.46324  27.06476
+[3,]  27.31906  33.78894
+\end{Soutput}
+\end{Schunk}
+Where is it centered? 
+\begin{Schunk}
+\begin{Sinput}
+> colMeans(advertising[,1:3])
+\end{Sinput}
+\begin{Soutput}
+       TV     radio newspaper 
+ 147.0425   23.2640   30.5540 
+\end{Soutput}
+\end{Schunk}
+What are its axes and corresponding half-lengths?
+\begin{Schunk}
+\begin{Sinput}
+> abs(drop(sqrt(lambda) * sqrt(((p*(n-1))/(n*(n-p)))* 
++                                qf(alpha, df1 = p, df2 = (n-p)))) %*% e)
+\end{Sinput}
+\begin{Soutput}
+         [,1]      [,2]      [,3]
+[1,] 3.634489 0.7988623 0.6799346
+\end{Soutput}
+\end{Schunk}
 \item Compute 95\% T2 simultaneous confidence intervals for the three mean components.
+\begin{Schunk}
+\begin{Sinput}
+> alpha <- 0.05
+> c2 <- (n - 1) * p * qf(1 - alpha, p, n - p) / (n - p)
+> a <- c(1,0,0)
+> t(a) %*% X_bar + c(-1, 1) * sqrt(c2 * t(a) %*% S %*% a / n)
+\end{Sinput}
+\begin{Soutput}
+[1] 129.8373 164.2477
+\end{Soutput}
+\begin{Sinput}
+> a <- c(0,1,0)
+> t(a) %*% X_bar + c(-1, 1) * sqrt(c2 * t(a) %*% S %*% a / n)
+\end{Sinput}
+\begin{Soutput}
+[1] 20.2887 26.2393
+\end{Soutput}
+\begin{Sinput}
+> a <- c(0,0,1)
+> t(a) %*% X_bar + c(-1, 1) * sqrt(c2 * t(a) %*% S %*% a / n)
+\end{Sinput}
+\begin{Soutput}
+[1] 26.18956 34.91844
+\end{Soutput}
+\end{Schunk}
 \item Compute 95\% Bonferroni simultaneous confidence intervals for the three mean components.
-\item Carry out a Hotelling's $T^{2}$ test of the null hypothesis H0 : $\mu' = \left[150.0,20.0,30.0\right]$ at $\alpha = 0.05$. What is the test statistic, critical value, and the p-value? What is your conclusion regarding H0?
-\item Is $\mu' = [150.0, 20.0, 30.0]$ inside the 95\% confidence ellipse you computed in part (b)? Is this consistent with your findings in part (e)? Hint: It should be.
+\begin{Schunk}
+\begin{Sinput}
+> a <- c(1,0,0)
+> t(a) %*% X_bar + c(-1, 1) * qt(1 - 0.05 / (2 * p), n - 1) * 
++   sqrt(t(a) %*% S %*% a  / n)
+\end{Sinput}
+\begin{Soutput}
+[1] 132.3852 161.6998
+\end{Soutput}
+\begin{Sinput}
+> a <- c(0,1,0)
+> t(a) %*% X_bar + c(-1, 1) * qt(1 - 0.05 / (2 * p), n - 1) * 
++   sqrt(t(a) %*% S %*% a / n)
+\end{Sinput}
+\begin{Soutput}
+[1] 20.72931 25.79869
+\end{Soutput}
+\begin{Sinput}
+> a <- c(0,0,1)
+> t(a) %*% X_bar + c(-1, 1) * qt(1 - 0.05 / (2 * p), n - 1) * 
++   sqrt(t(a) %*% S %*% a  / n)
+\end{Sinput}
+\begin{Soutput}
+[1] 26.83589 34.27211
+\end{Soutput}
+\end{Schunk}
+\item Carry out a Hotelling's $T^{2}$ test of the null hypothesis H0 : $\mu' = \left[150.0,20.0,30.0\right]$ at $\alpha = 0.05$. What is the test statistic?
+\begin{Schunk}
+\begin{Sinput}
+> X <- c(150, 20, 30)
+> print(T2 <- n * (X_bar - t(X)) %*% solve(S) %*% t(X_bar - t(X)))
+\end{Sinput}
+\begin{Soutput}
+         [,1]
+[1,] 10.68821
+\end{Soutput}
+\end{Schunk}
+What is the critical value?
+\begin{Schunk}
+\begin{Sinput}
+> ((p * (n - 1))/ (n - p)) * qf(p = 1-0.05, df1 = p, df2 = (n-p))
+\end{Sinput}
+\begin{Soutput}
+[1] 8.032049
+\end{Soutput}
+\end{Schunk}
+What is the p-value? 
+\begin{Schunk}
+\begin{Sinput}
+> 1-pf(q = T2, df1 = p, df2 = (n-p))
+\end{Sinput}
+\begin{Soutput}
+             [,1]
+[1,] 1.533739e-06
+\end{Soutput}
+\end{Schunk}
+What is your conclusion regarding H0?
+\emph{There is enough evidence suggesting that $\mu \neq \left[150, 20, 30\right]$ for that reason I reject the null hypothesis}
+\item Is $\mu' = [150.0, 20.0, 30.0]$ inside the 95\% confidence ellipse you computed in part (b)? \emph{Yes, it is}  Is this consistent with your findings in part (e)? \emph{Yes, the ellipse is located at $\mu = \left[147, 23.3, 30.6\right]$ which is different of the hyphotesys tested.}
 \item Use the bootstrap to test the same null hypothesis as in part (e), now using this as your test statistic
 \[\Lambda = \left(\frac{\left|S\right|}{\left|S_{0}\right|}\right)^{n/2},\]where \[S = \frac{1}{n-1}\sum_{j=1}^{n}(x_{j}-\bar{x})(x_{j}-\bar{x})'\] is the sample covariance matrix, and \[S_{0} = \frac{1}{n-1}\sum_{j=1}^{n}(x_{j}-\bar{x})(x_{j}-\bar{x})'\] is the sample covariance matrix under the assumption that $H_{0}$ is true. So that all our answers match, first do \texttt{set.seed(2)}, and use $B=500$ bootstrap iterations. What is the p-value?
 \begin{Schunk}
 \begin{Sinput}
-> 
+> set.seed(2)
+> B <- 500
+> n <- nrow(advertising)
+> H0 <- c(140, 20, 30)
+> dSi <- det(var(advertising[,1:3]))
+> dS0 <- det(var(t(t(advertising[,1:3]) - colMeans(advertising) + H0)))
+> dS <- sapply(seq_len(B), function(S){
++   S <- var(advertising[sample(seq_len(n), replace = TRUE), 1:3])
++   return(det(S))
++ })
+> mean((dS/dS0) ^ (n/2) >  (dSi/ dS0) ^(n/2))
 \end{Sinput}
+\begin{Soutput}
+[1] 0.388
+\end{Soutput}
 \end{Schunk}
 \end{enumerate}
 \end{enumerate}

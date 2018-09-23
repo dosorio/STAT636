@@ -1,9 +1,9 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.19 (TeX Live 2018) (preloaded format=pdflatex 2018.4.16)  22 SEP 2018 16:29
+This is pdfTeX, Version 3.14159265-2.6-1.40.19 (TeX Live 2018) (preloaded format=pdflatex 2018.4.16)  22 SEP 2018 22:20
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
-**STAT636_Template.tex
-(./STAT636_Template.tex
+**HW2_DanielOsorio.tex
+(./HW2_DanielOsorio.tex
 LaTeX2e <2018-04-01> patch level 2
 Babel <3.18> and hyphenation patterns for 84 language(s) loaded.
 (/usr/local/texlive/2018/texmf-dist/tex/latex/paper/paper.cls
@@ -377,8 +377,8 @@ LaTeX Font Info:    Try loading font information for T1+aer on input line 105.
 (/usr/local/texlive/2018/texmf-dist/tex/latex/ae/t1aer.fd
 File: t1aer.fd 1997/11/16 Font definitions for T1/aer.
 ))))
-(./STAT636_Template.aux)
-\openout1 = `STAT636_Template.aux'.
+(./HW2_DanielOsorio.aux)
+\openout1 = `HW2_DanielOsorio.aux'.
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 10.
 LaTeX Font Info:    ... okay on input line 10.
@@ -517,7 +517,7 @@ File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 
 LaTeX Warning: No \author given.
 
-(./STAT636_Template-concordance.tex)
+(./HW2_DanielOsorio-concordance.tex)
 LaTeX Font Info:    Try loading font information for T1+aett on input line 18.
 
 (/usr/local/texlive/2018/texmf-dist/tex/latex/ae/t1aett.fd
@@ -526,54 +526,60 @@ File: t1aett.fd 1997/11/16 Font definitions for T1/aett.
 
 
 {/usr/local/texlive/2018/texmf-var/fonts/map/pdftex/updmap/pdftex.map}]
-<STAT636_Template-003.pdf, id=16, 433.62pt x 144.54pt>
-File: STAT636_Template-003.pdf Graphic file (type pdf)
-<use STAT636_Template-003.pdf>
-Package pdftex.def Info: STAT636_Template-003.pdf  used on input line 73.
+<HW2_DanielOsorio-003.pdf, id=17, 433.62pt x 144.54pt>
+File: HW2_DanielOsorio-003.pdf Graphic file (type pdf)
+<use HW2_DanielOsorio-003.pdf>
+Package pdftex.def Info: HW2_DanielOsorio-003.pdf  used on input line 73.
 (pdftex.def)             Requested size: 432.48355pt x 144.1691pt.
-<STAT636_Template-004.pdf, id=17, 433.62pt x 144.54pt>
-File: STAT636_Template-004.pdf Graphic file (type pdf)
-<use STAT636_Template-004.pdf>
-Package pdftex.def Info: STAT636_Template-004.pdf  used on input line 92.
+<HW2_DanielOsorio-004.pdf, id=18, 433.62pt x 144.54pt>
+File: HW2_DanielOsorio-004.pdf Graphic file (type pdf)
+<use HW2_DanielOsorio-004.pdf>
+Package pdftex.def Info: HW2_DanielOsorio-004.pdf  used on input line 92.
 (pdftex.def)             Requested size: 432.48355pt x 144.1691pt.
- [2 <./STAT636_Template-003.pdf> <./STAT636_Template-004.pdf>]
-<STAT636_Template-007.pdf, id=34, 433.62pt x 144.54pt>
-File: STAT636_Template-007.pdf Graphic file (type pdf)
-<use STAT636_Template-007.pdf>
-Package pdftex.def Info: STAT636_Template-007.pdf  used on input line 124.
+ [2 <./HW2_DanielOsorio-003.pdf> <./HW2_DanielOsorio-004.pdf>]
+<HW2_DanielOsorio-007.pdf, id=35, 433.62pt x 144.54pt>
+File: HW2_DanielOsorio-007.pdf Graphic file (type pdf)
+<use HW2_DanielOsorio-007.pdf>
+Package pdftex.def Info: HW2_DanielOsorio-007.pdf  used on input line 124.
 (pdftex.def)             Requested size: 432.48355pt x 144.1691pt.
-<STAT636_Template-008.pdf, id=35, 433.62pt x 216.81pt>
-File: STAT636_Template-008.pdf Graphic file (type pdf)
-<use STAT636_Template-008.pdf>
-Package pdftex.def Info: STAT636_Template-008.pdf  used on input line 131.
+<HW2_DanielOsorio-008.pdf, id=36, 433.62pt x 216.81pt>
+File: HW2_DanielOsorio-008.pdf Graphic file (type pdf)
+<use HW2_DanielOsorio-008.pdf>
+Package pdftex.def Info: HW2_DanielOsorio-008.pdf  used on input line 131.
 (pdftex.def)             Requested size: 432.48355pt x 216.25368pt.
- [3 <./STAT636_Template-007.pdf> <./STAT636_Template-008.pdf>] [4] (./STAT636_T
-emplate.aux) ) 
+ [3 <./HW2_DanielOsorio-007.pdf> <./HW2_DanielOsorio-008.pdf>] [4]
+Overfull \hbox (0.19327pt too wide) in paragraph at lines 262--264
+\T1/aer/m/n/12 What is your con-clu-sion re-gard-ing H0? \T1/aer/m/it/12 There 
+is enough ev-i-dence sug-gest-ing that $\OML/cmm/m/it/12 ^^V \OMS/cmsy/m/n/12 6
+\OT1/cmr/m/n/12 = []$
+ []
+
+[5] [6] (./HW2_DanielOsorio.aux) ) 
 Here is how much of TeX's memory you used:
  5088 strings out of 492649
- 70912 string characters out of 6129622
+ 71104 string characters out of 6129622
  146243 words of memory out of 5000000
  8828 multiletter control sequences out of 15000+600000
  34145 words of font info for 75 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  41i,7n,25p,489b,579s stack positions out of 5000i,500n,10000p,200000b,80000s
-</usr/local/texlive/2018/texmf-dist/fonts/type1/public/amsfonts/c
-m/cmex10.pfb></usr/local/texlive/2018/texmf-dist/fonts/type1/public/amsfonts/cm
-/cmmi12.pfb></usr/local/texlive/2018/texmf-dist/fonts/type1/public/amsfonts/cm/
-cmmi8.pfb></usr/local/texlive/2018/texmf-dist/fonts/type1/public/amsfonts/cm/cm
-r10.pfb></usr/local/texlive/2018/texmf-dist/fonts/type1/public/amsfonts/cm/cmr1
-2.pfb></usr/local/texlive/2018/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.p
-fb></usr/local/texlive/2018/texmf-dist/fonts/type1/public/amsfonts/cm/cmsltt10.
-pfb></usr/local/texlive/2018/texmf-dist/fonts/type1/public/amsfonts/cm/cmssbx10
-.pfb></usr/local/texlive/2018/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.
-pfb></usr/local/texlive/2018/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pf
-b></usr/local/texlive/2018/texmf-dist/fonts/type1/public/amsfonts/cm/cmti12.pfb
-></usr/local/texlive/2018/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt12.pfb>
-
-Output written on STAT636_Template.pdf (4 pages, 259357 bytes).
+</usr/local/texlive/2018/texmf-dist/fonts/typ
+e1/public/amsfonts/cm/cmex10.pfb></usr/local/texlive/2018/texmf-dist/fonts/type
+1/public/amsfonts/cm/cmmi12.pfb></usr/local/texlive/2018/texmf-dist/fonts/type1
+/public/amsfonts/cm/cmmi8.pfb></usr/local/texlive/2018/texmf-dist/fonts/type1/p
+ublic/amsfonts/cm/cmr10.pfb></usr/local/texlive/2018/texmf-dist/fonts/type1/pub
+lic/amsfonts/cm/cmr12.pfb></usr/local/texlive/2018/texmf-dist/fonts/type1/publi
+c/amsfonts/cm/cmr8.pfb></usr/local/texlive/2018/texmf-dist/fonts/type1/public/a
+msfonts/cm/cmsltt10.pfb></usr/local/texlive/2018/texmf-dist/fonts/type1/public/
+amsfonts/cm/cmssbx10.pfb></usr/local/texlive/2018/texmf-dist/fonts/type1/public
+/amsfonts/cm/cmsy10.pfb></usr/local/texlive/2018/texmf-dist/fonts/type1/public/
+amsfonts/cm/cmsy8.pfb></usr/local/texlive/2018/texmf-dist/fonts/type1/public/am
+sfonts/cm/cmti12.pfb></usr/local/texlive/2018/texmf-dist/fonts/type1/public/ams
+fonts/cm/cmtt12.pfb>
+Output written on HW2_DanielOsorio.pdf (6 pages, 265541 bytes).
 PDF statistics:
- 93 PDF objects out of 1000 (max. 8388607)
- 65 compressed objects within 1 object stream
+ 99 PDF objects out of 1000 (max. 8388607)
+ 69 compressed objects within 1 object stream
  0 named destinations out of 1000 (max. 500000)
  25 words of extra memory for PDF output out of 10000 (max. 10000000)
 

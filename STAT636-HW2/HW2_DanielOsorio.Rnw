@@ -29,7 +29,7 @@ S_hat
 \[\sqrt{n}(\bar{X} - \mu) \mathrel{\dot\sim} \mathcal{N}_{6}\left(0, \Sigma\right)\]
 \item The distribution of $n(\bar{X}-\mu)'\Sigma^{-1}(\bar{X} - \mu)$ \[n(\bar{X}-\mu)'\Sigma^{-1}(\bar{X} - \mu) \sim \mathcal{X}^{2}_{6}\]
 \item The approximate distribution of $n(\bar{X}-\mu)'S^{-1}(\bar{X} - \mu)$
-\[n(\bar{X}-\mu)'S^{-1}(\bar{X} - \mu) \mathrel{\dot\sim} \mathcal{X}^{2}_{6}\]
+\[n(\bar{X}-\mu)'S^{-1}(\bar{X} - \mu) \mathrel{\dot\sim} \frac{354}{54}\mathcal{F}_{60,54}\]
 \end{enumerate}
 \item Consider the \texttt{used\_car} data. For each of 10 used cars, we have the numeric variables Age (age of the car) and Price (sale price of car, in \$1,000s)
 <<>>=
@@ -84,15 +84,84 @@ plot(advertising[,1:3], las = 1)
 @
 
 \emph{The multivariable normal distribution does not look reasonable for this dataset because of not all the variables are independently normal}
-\item Determine the 95\% confidence ellipsoid for $\mu$. Where is it centered? What are its axes and corresponding half-lengths?
+\item Determine the 95\% confidence ellipsoid for $\mu$.
+<<>>=
+X_bar <- colMeans(advertising[,1:3])
+alpha <- 0.05
+S <- var(advertising[,1:3])
+e <- eigen(S)
+lambda <- e$values
+e <- e$vectors
+p <- ncol(advertising[,1:3])
+n <- nrow(advertising[,1:3])
+lb <- X_bar - abs(drop(sqrt(lambda) * sqrt(((p*(n-1))/(n*(n-p)))*
+                                   qf(1-alpha, df1 = p, df2 = (n-p)))) %*% e)
+ub <- X_bar + abs(drop(sqrt(lambda) * sqrt(((p*(n-1))/(n*(n-p)))*
+                                   qf(1-alpha, df1 = p, df2 = (n-p)))) %*% e)
+t(rbind(lb,ub))
+@
+Where is it centered? 
+<<>>=
+colMeans(advertising[,1:3])
+@
+What are its axes and corresponding half-lengths?
+<<>>=
+abs(drop(sqrt(lambda) * sqrt(((p*(n-1))/(n*(n-p)))* 
+                               qf(alpha, df1 = p, df2 = (n-p)))) %*% e)
+@
 \item Compute 95\% T2 simultaneous confidence intervals for the three mean components.
+<<>>=
+alpha <- 0.05
+c2 <- (n - 1) * p * qf(1 - alpha, p, n - p) / (n - p)
+a <- c(1,0,0)
+t(a) %*% X_bar + c(-1, 1) * sqrt(c2 * t(a) %*% S %*% a / n)
+a <- c(0,1,0)
+t(a) %*% X_bar + c(-1, 1) * sqrt(c2 * t(a) %*% S %*% a / n)
+a <- c(0,0,1)
+t(a) %*% X_bar + c(-1, 1) * sqrt(c2 * t(a) %*% S %*% a / n)
+@
 \item Compute 95\% Bonferroni simultaneous confidence intervals for the three mean components.
-\item Carry out a Hotelling's $T^{2}$ test of the null hypothesis H0 : $\mu' = \left[150.0,20.0,30.0\right]$ at $\alpha = 0.05$. What is the test statistic, critical value, and the p-value? What is your conclusion regarding H0?
-\item Is $\mu' = [150.0, 20.0, 30.0]$ inside the 95\% confidence ellipse you computed in part (b)? Is this consistent with your findings in part (e)? Hint: It should be.
+<<>>=
+a <- c(1,0,0)
+t(a) %*% X_bar + c(-1, 1) * qt(1 - 0.05 / (2 * p), n - 1) * 
+  sqrt(t(a) %*% S %*% a  / n)
+a <- c(0,1,0)
+t(a) %*% X_bar + c(-1, 1) * qt(1 - 0.05 / (2 * p), n - 1) * 
+  sqrt(t(a) %*% S %*% a / n)
+a <- c(0,0,1)
+t(a) %*% X_bar + c(-1, 1) * qt(1 - 0.05 / (2 * p), n - 1) * 
+  sqrt(t(a) %*% S %*% a  / n)
+@
+\item Carry out a Hotelling's $T^{2}$ test of the null hypothesis H0 : $\mu' = \left[150.0,20.0,30.0\right]$ at $\alpha = 0.05$. What is the test statistic?
+<<>>=
+X <- c(150, 20, 30)
+print(T2 <- n * (X_bar - t(X)) %*% solve(S) %*% t(X_bar - t(X)))
+@
+What is the critical value?
+<<>>=
+((p * (n - 1))/ (n - p)) * qf(p = 1-0.05, df1 = p, df2 = (n-p))
+@
+What is the p-value? 
+<<>>=
+1-pf(q = T2, df1 = p, df2 = (n-p))
+@
+What is your conclusion regarding H0?
+\emph{There is enough evidence suggesting that $\mu \neq \left[150, 20, 30\right]$ for that reason I reject the null hypothesis}
+\item Is $\mu' = [150.0, 20.0, 30.0]$ inside the 95\% confidence ellipse you computed in part (b)? \emph{Yes, it is}  Is this consistent with your findings in part (e)? \emph{Yes, the ellipse is located at $\mu = \left[147, 23.3, 30.6\right]$ which is different of the hyphotesys tested.}
 \item Use the bootstrap to test the same null hypothesis as in part (e), now using this as your test statistic
 \[\Lambda = \left(\frac{\left|S\right|}{\left|S_{0}\right|}\right)^{n/2},\]where \[S = \frac{1}{n-1}\sum_{j=1}^{n}(x_{j}-\bar{x})(x_{j}-\bar{x})'\] is the sample covariance matrix, and \[S_{0} = \frac{1}{n-1}\sum_{j=1}^{n}(x_{j}-\bar{x})(x_{j}-\bar{x})'\] is the sample covariance matrix under the assumption that $H_{0}$ is true. So that all our answers match, first do \texttt{set.seed(2)}, and use $B=500$ bootstrap iterations. What is the p-value?
 <<>>=
-
+set.seed(2)
+B <- 500
+n <- nrow(advertising)
+H0 <- c(140, 20, 30)
+dSi <- det(var(advertising[,1:3]))
+dS0 <- det(var(t(t(advertising[,1:3]) - colMeans(advertising) + H0)))
+dS <- sapply(seq_len(B), function(S){
+  S <- var(advertising[sample(seq_len(n), replace = TRUE), 1:3])
+  return(det(S))
+})
+mean((dS/dS0) ^ (n/2) >  (dSi/ dS0) ^(n/2))
 @
 \end{enumerate}
 \end{enumerate}
