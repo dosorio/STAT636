@@ -22,11 +22,11 @@
 > auto$origin <- as.factor(auto$origin)
 \end{Sinput}
 \end{Schunk}
-\item Test for a location effect, a variety effect, and a location-variety interaction at $\alpha = 0.05$. Do this using the manova function in R. Overall, what do you conclude about these data?
+\item Test for a location effect, a variety effect, and a location-variety interaction at $\alpha = 0.05$. Do this using the manova function in R. Overall, what do you conclude about these data? \textit{As all the p-values are lower than the given $\alpha$, I can conclude that there is enough evidence against the $H_{0}$, suggesting that there is a real difference in the means associated to the analyzed factors}
 \begin{Schunk}
 \begin{Sinput}
 > manovaResult <- manova(cbind(displacement,horsepower,acceleration) ~ 
-+                          origin + cylinders + origin*cylinders,auto)
++                          origin + cylinders + origin*cylinders, auto)
 > manovaResult
 \end{Sinput}
 \begin{Soutput}
@@ -57,7 +57,7 @@ Residuals        18
 Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
 \end{Soutput}
 \end{Schunk}
-\item Construct the two-way MANOVA table by computing SSP\textsubscript{FAC1}, SSP\textsubscript{FAC2}, SSP\textsubscript{INT}, SSP\textsubscript{RES}, and SSP\textsubscript{COR}. Provide R code that matches the Wilks’ statistics computed by manova. Note that your p-values (computed according to the notes) will not match those of manova, because the distributional results we have learned for two-way MANOVA are large-sample approximations. That said, how do your p-values compare to those of manova?
+\item Construct the two-way MANOVA table by computing SSP\textsubscript{FAC1}, SSP\textsubscript{FAC2}, SSP\textsubscript{INT}, SSP\textsubscript{RES}, and SSP\textsubscript{COR}. Provide R code that matches the Wilks’ statistics computed by manova. Note that your p-values (computed according to the notes) will not match those of manova, because the distributional results we have learned for two-way MANOVA are large-sample approximations. That said, how do your p-values compare to those of manova? \textit{All the p-values allow performing the same inference about the effects of the factors analyzed. Those computed manually tend to be smaller than the reported by the \texttt{manova} function}
 \begin{Schunk}
 \begin{Sinput}
 > n <- 4
@@ -97,83 +97,79 @@ horsepower    4082.041667  787.00000 1057.333333 6857.25 12783.6250
 acceleration     5.041667   23.24333    5.743333  105.91   139.9383
 \end{Soutput}
 \begin{Sinput}
-> attach(auto)
-> x_bar <- colMeans(auto[, 2:4])
-> x_bar_lk <- rbind(
-+   colMeans(auto[cylinders == 4 & origin == 1, 2:4]), 
-+   colMeans(auto[cylinders == 4 & origin == 2, 2:4]),
-+   colMeans(auto[cylinders == 4 & origin == 3, 2:4]),
-+   colMeans(auto[cylinders == 6 & origin == 1, 2:4]),
-+   colMeans(auto[cylinders == 6 & origin == 2, 2:4]),
-+   colMeans(auto[cylinders == 6 & origin == 3, 2:4]))
-> x_bar_l_dot <- rbind(
-+   colMeans(auto[cylinders == 4, 2:4]), 
-+   colMeans(auto[cylinders == 6, 2:4]))
-> x_bar_dot_k <- rbind(
-+   colMeans(auto[origin == 1, 2:4]), 
-+   colMeans(auto[origin == 2, 2:4]),
-+   colMeans(auto[origin == 3, 2:4]))
-> SSP_cor <- SSP_fac_1 <- SSP_fac_2 <- SSP_int <- 
-+   SSP_res <- matrix(0, nrow = p, ncol = p)
-> for(l in 1:g) {
-+   SSP_fac_1 <- SSP_fac_1 + b * n * 
-+     t(x_bar_l_dot[l, , drop = FALSE] - x_bar) %*% 
-+     (x_bar_l_dot[l, , drop = FALSE] - x_bar)
-+   SSP_fac_2 <- SSP_fac_2 + g * n * 
-+     t(x_bar_dot_k[l, , drop = FALSE] - x_bar) %*% 
-+     (x_bar_dot_k[l, , drop = FALSE] - x_bar)
-+   for(k in 1:b) {
-+     SSP_int <- SSP_int + n * t(x_bar_lk[(l - 1) * 2 + k, , drop = FALSE] - 
-+       x_bar_l_dot[l, , drop = FALSE] - 
-+         x_bar_dot_k[k, , drop = FALSE] + x_bar) %*% 
-+       (x_bar_lk[(l - 1) * 2 + k, , drop = FALSE] - 
-+          x_bar_l_dot[l, , drop = FALSE] - 
-+       x_bar_dot_k[k, , drop = FALSE] + x_bar)
-+     for(r in 1:n) {
-+       SSP_res <- SSP_res + 
-+         t(as.matrix(auto[(l - 1) * 2 * n + (k - 1) * n + r, 2:4]) - 
-+         x_bar_lk[(l - 1) * 2 + k, , drop = FALSE]) %*% 
-+         (as.matrix(auto[(l - 1) * 2 * n + (k - 1) * n + r, 2:4]) - 
-+         x_bar_lk[(l - 1) * 2 + k, , drop = FALSE])
-+       SSP_cor <- SSP_cor + 
-+         t(as.matrix(auto[(l - 1) * 2 * n + (k - 1) * n + r, 2:4]) - 
-+         x_bar) %*% (as.matrix(auto[(l - 1) * 2 * n + (k - 1) * 
-+                                      n + r, 2:4]) - x_bar)
+> xBar <- as.numeric(apply(auto[,2:4],2,mean))
+> SSPfac1 <- SSPfac2 <- SSPint <- SSPres <- SSPcor <- 0
+> for (l in unique(auto$cylinders)){
++   xBar_l <- as.numeric(apply(auto[auto[,1] == l,2:4],2,mean))
++   SSPfac1 <- SSPfac1 + ((b * n * (xBar_l-xBar) %*% t(xBar_l - xBar)))
++   for(k in unique(auto$origin)){
++     xBar_k <- as.numeric(apply(auto[auto[,5] == k,2:4],2,mean))
++     xBar_lk <- as.numeric(apply(auto[auto[,1] == l & 
++                                        auto[,5] == k,2:4],2,mean))
++     SSPint <- SSPint + (n * ((xBar_lk - xBar_l - xBar_k + xBar) %*% 
++                                t(xBar_lk - xBar_l - xBar_k + xBar)))
++     for(r in seq_len(n)){
++       x <- as.numeric(auto[auto[,1] == l & auto[,5] == k & 
++                              seq_len(n) == r,2:4])
++       SSPres <- SSPres + ((x - xBar_lk) %*% t(x - xBar_lk))
++       SSPcor <- SSPcor + ((x - xBar) %*% t(x - xBar))
 +     }
 +   }
 + }
+> for(k in unique(auto$origin)){
++     xBar_k <- apply(auto[auto[,5] == k,2:4],2,mean)
++     SSPfac2 <- SSPfac2 + (g * n * ((xBar_k - xBar) %*% t(xBar_k - xBar)))
++ }
 > # Cylinders
-> Lambda <- det(SSP_res) / det(SSP_fac_1 + SSP_res)
+> Lambda <- det(SSPres) / det(SSPfac1 + SSPres)
+> Lambda
+\end{Sinput}
+\begin{Soutput}
+[1] 0.1152037
+\end{Soutput}
+\begin{Sinput}
 > 1 - pf((((g * b * (n - 1) - p + 1) / 2) / ((abs((g - 1) - p) + 1) / 2)) * 
 +   (1 - Lambda) / Lambda, abs((g - 1) - p) + 1, g * b * (n - 1) - p + 1)
 \end{Sinput}
 \begin{Soutput}
-[1] 0.1033753
+[1] 9.813233e-08
 \end{Soutput}
 \begin{Sinput}
 > # Origin
-> Lambda <- det(SSP_res) / det(SSP_fac_2 + SSP_res)
+> Lambda <- det(SSPres) / det(SSPfac2 + SSPres)
+> Lambda
+\end{Sinput}
+\begin{Soutput}
+[1] 0.2030373
+\end{Soutput}
+\begin{Sinput}
 > 1 - pf((((g * b * (n - 1) - p + 1) / 2) / ((abs((b - 1) - p) + 1) / 2)) * 
 +   (1 - Lambda) / Lambda, abs((b - 1) - p) + 1, g * b * (n - 1) - p + 1)
 \end{Sinput}
 \begin{Soutput}
-[1] 0.256252
+[1] 2.888066e-06
 \end{Soutput}
 \begin{Sinput}
 > # Interaction
-> Lambda <- det(SSP_res) / det(SSP_int + SSP_res)
+> Lambda <- det(SSPres) / det(SSPint + SSPres)
+> Lambda
+\end{Sinput}
+\begin{Soutput}
+[1] 0.2598601
+\end{Soutput}
+\begin{Sinput}
 > 1 - pf((((g * b * (n - 1) - p + 1) / 2) / 
 +           ((abs((g - 1) * (b - 1) - p) + 1) / 2)) * 
 +   (1 - Lambda) / Lambda, abs((g - 1) * (b - 1) - p) + 
 +     1, g * b * (n - 1) - p + 1)
 \end{Sinput}
 \begin{Soutput}
-[1] 0.0005879751
+[1] 2.079298e-05
 \end{Soutput}
 \end{Schunk}
 \end{enumerate}
 \item Conduct a simulation study to investigate the coverage probabilities of different confidence
-interval types with multivariate data. Let the sample size be $n = 30$, the number of variables $p = 5$, the number of simulations $B = 10000$, and \[\mu' =\left(0, 0, 0, 0, 0\right)\] and \[\Sigma = \left(\begin{array}{ccccc}1.0&0.6&0.6&0.6&0.6\\0.6&1.0&0.6&0.6&0.6\\0.6&0.6&1.0&0.6&0.6\\0.6&0.6&0.6&1.0&0.6\\0.6&0.6&0.6&0.6&1.0\end{array}\right)\] For each of $B$ times, simulate a dataset of size $n$ from the $N_{p}\left(\mu,\Sigma\right)$ distribution, compute 95\% confidence intervals of types one-at-a-time, $T^{2}$ simultaneous, and Bonferroni simultaneous, and record whether each interval contains its corresponding population mean component value. Report a $3 \times 5$ matrix of estimated coverage probabilities. The rows of your matrix should correspond to the 3 different interval types, and the columns should correspond to the p mean components; be sure to clearly indicate which row goes with which interval type. Comment on the performance of the different interval types.
+interval types with multivariate data. Let the sample size be $n = 30$, the number of variables $p = 5$, the number of simulations $B = 10000$, and \[\mu' =\left(0, 0, 0, 0, 0\right)\] and \[\Sigma = \left(\begin{array}{ccccc}1.0&0.6&0.6&0.6&0.6\\0.6&1.0&0.6&0.6&0.6\\0.6&0.6&1.0&0.6&0.6\\0.6&0.6&0.6&1.0&0.6\\0.6&0.6&0.6&0.6&1.0\end{array}\right)\] For each of $B$ times, simulate a dataset of size $n$ from the $N_{p}\left(\mu,\Sigma\right)$ distribution, compute 95\% confidence intervals of types one-at-a-time, $T^{2}$ simultaneous, and Bonferroni simultaneous, and record whether each interval contains its corresponding population mean component value. Report a $3 \times 5$ matrix of estimated coverage probabilities. The rows of your matrix should correspond to the 3 different interval types, and the columns should correspond to the p mean components; be sure to clearly indicate which row goes with which interval type. Comment on the performance of the different interval types. \textit{The confidence intervals using the quantiles by resampling tend to be more relaxed in detecting differences with respect to the mean, meanwhile, the Bonferroni ones seem to be more accurate. T2 based confidence intervals are between the other two type of intervals in terms of accuracy.}
 \begin{Schunk}
 \begin{Sinput}
 > simmulationFunction <- function(n, p, rho, alpha, B = 1000) {
@@ -207,8 +203,8 @@ interval types with multivariate data. Let the sample size be $n = 30$, the numb
 \begin{Soutput}
               [,1]   [,2]   [,3]   [,4]   [,5]
 95%:        1.0000 1.0000 1.0000 1.0000 1.0000
-T2:         0.9996 0.9994 0.9997 0.9994 0.9996
-Bonferroni: 0.9900 0.9896 0.9921 0.9904 0.9905
+T2:         0.9997 0.9996 0.9998 0.9999 0.9996
+Bonferroni: 0.9909 0.9912 0.9915 0.9909 0.9908
 \end{Soutput}
 \end{Schunk}
 \end{enumerate}

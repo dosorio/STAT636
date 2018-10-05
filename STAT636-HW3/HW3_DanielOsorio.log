@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.19 (TeX Live 2018) (preloaded format=pdflatex 2018.4.16)  4 OCT 2018 21:38
+This is pdfTeX, Version 3.14159265-2.6-1.40.19 (TeX Live 2018) (preloaded format=pdflatex 2018.4.16)  5 OCT 2018 14:59
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -539,15 +539,16 @@ File: t1aett.fd 1997/11/16 Font definitions for T1/aett.
  [4]
 (./HW3_DanielOsorio.aux) ) 
 Here is how much of TeX's memory you used:
- 5075 strings out of 492649
- 70495 string characters out of 6129622
- 146315 words of memory out of 5000000
- 8816 multiletter control sequences out of 15000+600000
- 33818 words of font info for 75 fonts, out of 8000000 for 9000
+ 5082 strings out of 492649
+ 70560 string characters out of 6129622
+ 148315 words of memory out of 5000000
+ 8818 multiletter control sequences out of 15000+600000
+ 36785 words of font info for 80 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 41i,8n,25p,1032b,584s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 41i,7n,25p,1325b,586s stack positions out of 5000i,500n,10000p,200000b,80000s
 </usr/local/texlive/2018/texmf-dist/fonts/type1/publi
 c/amsfonts/cm/cmex10.pfb></usr/local/texlive/2018/texmf-dist/fonts/type1/public
+/amsfonts/cm/cmitt10.pfb></usr/local/texlive/2018/texmf-dist/fonts/type1/public
 /amsfonts/cm/cmmi12.pfb></usr/local/texlive/2018/texmf-dist/fonts/type1/public/
 amsfonts/cm/cmmi8.pfb></usr/local/texlive/2018/texmf-dist/fonts/type1/public/am
 sfonts/cm/cmr10.pfb></usr/local/texlive/2018/texmf-dist/fonts/type1/public/amsf
@@ -557,11 +558,12 @@ cm/cmsltt10.pfb></usr/local/texlive/2018/texmf-dist/fonts/type1/public/amsfonts
 /cm/cmssbx10.pfb></usr/local/texlive/2018/texmf-dist/fonts/type1/public/amsfont
 s/cm/cmsy10.pfb></usr/local/texlive/2018/texmf-dist/fonts/type1/public/amsfonts
 /cm/cmsy8.pfb></usr/local/texlive/2018/texmf-dist/fonts/type1/public/amsfonts/c
-m/cmtt12.pfb>
-Output written on HW3_DanielOsorio.pdf (4 pages, 128532 bytes).
+m/cmti12.pfb></usr/local/texlive/2018/texmf-dist/fonts/type1/public/amsfonts/cm
+/cmtt12.pfb>
+Output written on HW3_DanielOsorio.pdf (4 pages, 146780 bytes).
 PDF statistics:
- 62 PDF objects out of 1000 (max. 8388607)
- 43 compressed objects within 1 object stream
+ 70 PDF objects out of 1000 (max. 8388607)
+ 49 compressed objects within 1 object stream
  0 named destinations out of 1000 (max. 500000)
  5 words of extra memory for PDF output out of 10000 (max. 10000000)
 
