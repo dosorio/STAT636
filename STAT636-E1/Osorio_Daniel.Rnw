@@ -1,0 +1,105 @@
+\documentclass[12pt,a4paper]{paper}
+\usepackage[utf8]{inputenc}
+\usepackage[english]{babel}
+\usepackage{amsmath}
+\usepackage{enumitem}
+\usepackage{amsfonts}
+\usepackage{arydshln}
+\usepackage{amssymb}
+\usepackage{multicol}
+\usepackage[left=1cm,right=1cm,top=1.5cm,bottom=2cm]{geometry}
+\begin{document}
+\title{STAT636 - Exam 1\\\small{Daniel Osorio - dcosorioh@tamu.edu\\Department of Veterinary Integrative Biosciences\\Texas A\&M University}}
+\maketitle
+\SweaveOpts{concordance=TRUE}
+\begin{enumerate}
+\item 
+<<>>=
+print(Sigma <- matrix(c(1,0.125,0.2,
+                        0.125,0.25,0.1,
+                        0.2,0.1,0.64), 
+                      ncol = 3, 
+                      byrow = TRUE))
+@
+\begin{enumerate}
+\item Correlation Value 
+<<>>=
+# cov(x,y)/ sd(x) * sd(y)
+Sigma[2,3] / (sqrt(Sigma[2,2]) * sqrt(Sigma[3,3]))
+@
+\item First eigen value and eigen vector of sigma
+<<>>=
+eigenDSigma <- eigen(Sigma)
+# First eigen value of Sigma
+eigenDSigma$values[1]
+# First eigen vector of Sigma
+eigenDSigma$vectors[,1]
+@
+\item Determinant of sigma
+<<>>=
+det(Sigma)
+@
+\item Is Sigma PD? \textit{Yes, because all of their eigen values are positive}
+<<>>=
+all(eigenDSigma$values > 0)
+@
+\item What is the inverse of $\Sigma$?
+<<>>=
+solve(Sigma)
+@
+\item What is the first eigenvalue and eigenvector of $\Sigma^{-1}$
+<<>>=
+eigenDinvSigma <- eigen(solve(Sigma))
+eigenDinvSigma$values[1]
+eigenDinvSigma$vectors[1,]
+@
+\end{enumerate}
+\item
+<<>>=
+X <- read.csv("exam_1.csv")
+@
+\begin{enumerate}
+\item 90 \% CI region 
+<<>>=
+n <- nrow(X)
+p <- ncol(X)
+# Center
+print(x_bar <- colMeans(X))
+S <- var(X)
+eigen_S <- eigen(S)
+# Primary axes
+eigen_S$vectors
+c2 <- (((n - 1) * p) / (n - p)) * qf(0.90, p, n - p)
+# Half lengths
+sqrt(eigen_S$values / n) * sqrt(c2)
+# 90% Confidence region
+print(CR90 <- sapply(seq_len(p), function(x){
+  x_bar[x] + c(-1, 1) * sqrt(c2 * S[x, x] / n)
+}))
+@
+\item Interpretation:\textit{A 90\% confidence region is a range of values that you can be certain contains the 90\% of the population values.}
+\item Is the given value contained? \textit{No.}
+<<>>=
+mu_0 <- c(-0.5, 0, 0.5)
+all(CR90[1,] < mu_0 & CR90[2,] > mu_0)
+@
+\item 90\% Bonferroni simultaneous confidence intervals
+<<>>=
+# Bonferroni 
+sapply(seq_len(p), function(x){
+x_bar[1] + c(-1, 1) * qt(1 - 0.1 / (2 * p), n - 1) * sqrt(S[1, 1] / n)
+})
+@
+\item Interpretation:\textit{A 90\% confidence interval is a range of values that you can be 90\% certain contains the true mean of the population.}
+\item
+<<>>=
+S_0 <- (t(X) - mu_0) %*% t(t(X) - mu_0) / (n - 1)
+# T2 Statistic Value
+print(T_2_stat <- n * t(x_bar - mu_0) %*% solve(S) %*% (x_bar - mu_0))
+# P - Value
+print(p_value <- 1 - pf((n - p) * T_2_stat / ((n - 1) * p), p, n - p))
+T_2_stat <= c2
+@
+\end{enumerate}
+\end{enumerate}
+\end{document}
