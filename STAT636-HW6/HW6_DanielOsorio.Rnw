@@ -1,0 +1,265 @@
+\documentclass[12pt,a4paper]{paper}
+\usepackage[utf8]{inputenc}
+\usepackage[english]{babel}
+\usepackage{amsmath}
+\usepackage{enumitem}
+\usepackage{fixltx2e}
+\usepackage{multicol}
+\usepackage{amsmath}
+\usepackage{enumitem}
+\usepackage{arydshln}
+\usepackage{amsfonts}
+\usepackage{multirow}
+\usepackage{multicol}
+\usepackage{amssymb}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage[left=1cm,right=1cm,top=1.5cm,bottom=2cm]{geometry}
+\begin{document}
+\title{STAT636 - Homework 6\\\small{Daniel Osorio - dcosorioh@tamu.edu\\Department of Veterinary Integrative Biosciences\\Texas A\&M University}}
+\maketitle
+\SweaveOpts{concordance=TRUE}
+\begin{enumerate}
+\item Consider the \texttt{Life\_Expectancy} data. Let the response $Y$ be \texttt{Life.expectancy}, and consider the numeric variables \texttt{Income.composition.of.resources}, and \texttt{Schooling} as the predictor variables. For the purpose of predicting the value of $Y$ , we will consider non-linear models.
+<<>>=
+lifeExpectancy <- read.csv("Life_Expectancy.csv")
+lifeExpectancy <- lifeExpectancy[,c("Life.expectancy","Schooling")]
+lifeExpectancy <- lifeExpectancy[complete.cases(lifeExpectancy),]
+@
+\begin{enumerate}
+\item Polynomial regression.
+\begin{enumerate}
+\item First predict \texttt{Life.expectancy} using a fourth-degree polynomial in \texttt{Schooling}. From the p-value of coefficients, what degree of polynomial do you think is necessary? \textit{From the p-values, less than 4.}
+<<>>=
+lifeExpectancy[,2:5] <- sapply(1:4, function(x){lifeExpectancy[,2]^x})
+colnames(lifeExpectancy) <- c("Y", "X1", "X2", "X3", "X4")
+p4 <- lm(Y~., data = lifeExpectancy[,1:5])
+summary(p4)
+@
+\item Use a third-degree polynomial in \texttt{Schooling} to fit the data again. Then create a grid of values for \texttt{Schooling}
+<<>>=
+school_grid <- seq(from = 1.53, to = 20.04)
+@
+and make predictions for each. Finally plot the data, and add the fit from the degree-3 polynomial, with 2 times the standard error shown as error bars.
+<<fig=TRUE, height=2.5>>=
+lifeExpectancy <- lifeExpectancy[,1:4]
+p3 <- lm(Y~., data = lifeExpectancy)
+summary(p3)
+school_grid <- as.data.frame(sapply(1:3, function(x){school_grid^x}))
+colnames(school_grid) <- c("X1", "X2", "X3")
+sE <- predict(p3,school_grid, se.fit = TRUE)
+par(mar=c(4,4,1,1), mgp = c(1.7,0.5,0))
+x <- school_grid[,1]
+ubSE <- sE$fit + (2* sE$se.fit)
+lbSE <- sE$fit - (2* sE$se.fit)
+yLim <- c(lbSE, ubSE)
+plot(lifeExpectancy[,2:1], 
+     pch = 20, col = "gray80", las = 1, xlab= "Schooling", 
+     ylab= "Life Expectancy", ylim= c(min(yLim), max(yLim)))
+points(y = sE$fit, x = x, type = "l" ,col= "red", lwd=2)
+arrows(x,ubSE,x,lbSE, length=0.05, angle=90, code=3, col = "red")
+@
+\end{enumerate}
+\item Splines.
+\begin{enumerate}
+\item Fit \texttt{Life.expectancy} to \texttt{Schooling} using a regression model with cubic splines with specified knots at \texttt{Schooling} 5, 10 and 15. Make predictions at the grid you created above, and plot the data and add your cubic splines with 2 times the standard error
+shown as error bars.
+<<fig=TRUE, height=2.5>>=
+library(splines)
+lifeExpectancy <- lifeExpectancy[,1:2]
+b1 <- lm(Y ~ bs(X1, knots = c(5,10,15)), data = lifeExpectancy)
+summary(b1)
+X1 <- school_grid[,1]
+sE <- predict(b1,bs(X1, knots = c(5,10,15)), se.fit = TRUE)
+x <- school_grid[,1]
+ubSE <- sE$fit + (2* sE$se.fit)
+lbSE <- sE$fit - (2* sE$se.fit)
+par(mar=c(4,4,1,1), mgp = c(1.7,0.5,0))
+plot(lifeExpectancy[,2:1], pch = 20, col = "gray80", las = 1, 
+     xlab= "Schooling", ylab= "Life Expectancy", 
+     ylim= c(min(c(lbSE, ubSE)), max(c(lbSE, ubSE))))
+points(y = sE$fit, x = x, type = "l" ,col= "red", lwd=2)
+arrows(x,ubSE,x,lbSE, length=0.05, angle=90, code=3, col = "red")
+@
+\item Fit \texttt{Life.expectancy} to \texttt{Schooling} using a regression model with nature splines with degree of freedom 4. Make predictions at the grid you created above, and plot the data and add your cubic splines with 2 times the standard error shown as error bars. Note that at the boundary of data, nature splines are better than basic cubic splines.
+<<fig=TRUE, height=2.5>>=
+library(splines)
+b2 <- lm(Y ~ ns(X1, df = 4), data = lifeExpectancy)
+summary(b2)
+sE <- predict(b2,ns(X1, df = 4), se.fit = TRUE)
+ubSE <- sE$fit + (2* sE$se.fit)
+lbSE <- sE$fit - (2* sE$se.fit)
+par(mar=c(4,4,1,1), mgp = c(1.7,0.5,0))
+plot(lifeExpectancy[,2:1], 
+     pch = 20, col = "gray80", 
+     las = 1, xlab= "Schooling", ylab= "Life Expectancy", 
+     ylim= c(min(c(lbSE, ubSE)), max(c(lbSE, ubSE))))
+points(y = sE$fit, x = x, type = "l" ,col= "red", lwd=2)
+arrows(x,ubSE,x,lbSE, length=0.05, angle=90, code=3, col = "red")
+@
+\item For smoothing splines, select the $\lambda$ by cross-validation; what's your result? Also
+plot the data and add your smoothing splines.
+<<fig=TRUE, height=2.5>>=
+lifeExpectancy <- unique(lifeExpectancy)
+b3 <- smooth.spline(x = lifeExpectancy[,2], 
+                    y = lifeExpectancy[,1], 
+                    cv = TRUE)
+b3
+par(mar=c(4,4,1,1), mgp = c(1.7,0.5,0))
+plot(lifeExpectancy[,2:1], 
+     pch = 20, col = "gray80", las = 1, 
+     xlab= "Schooling", ylab= "Life Expectancy")
+points(x = b3$x, y = b3$y, type = "l", col = "red", lwd=2)
+@
+\end{enumerate}
+\end{enumerate}
+\item  Consider the \texttt{wine\_quality\_red data}. These contain eleven different variables (1 : fixed acidity; 2 : volatile acidity; 3 : citric acid; 4 : residual sugar; 5 : chlorides; 6 : free sulfur dioxide; 7 : total sulfur dioxide; 8 : density; 9 : pH; 10 : sulphates; 11 : alcohol) and one output (quality (score between 0 and 10) ). Use \texttt{tree} method and \texttt{random forest} method to perform classification.
+<<>>=
+wineData <- read.csv("winequality_red.csv")
+@
+\begin{enumerate}
+\item  Use tree method to do classification, and plot the tree graph
+<<fig=TRUE, height=3>>=
+treeModel <- tree::tree(quality~., wineData)
+par(mar=c(1,1,1,1))
+plot(treeModel)
+text(treeModel)
+@
+\begin{enumerate}
+\item  What’s the training error rate?
+<<>>=
+mean((wineData$quality - predict(treeModel))^2)
+@
+\item  Randomly sample 1000 rows as training data and use tree method to do classification.
+What’s the accuracy rate for test data? (Do \texttt{set.seed(1)} before sampling.)
+<<>>=
+set.seed(1)
+n <- seq_len(nrow(wineData))
+training <- sample(n, size = 1000)
+testing <- n[!n %in% training]
+training <- wineData[training,]
+testing <- wineData[testing,]
+treeModel <- rpart::rpart(quality~., training)
+prediction <- predict(treeModel, newdata = testing[,-12])
+mean((testing$quality - prediction)^2)
+@
+\end{enumerate}
+\item Use a random forest to do classification with the same training data set. At each split,
+allow 7 variables to be considered. (Do \texttt{set.seed(1)} before doing random forest.)
+<<>>=
+set.seed(1)
+rForest <- randomForest::randomForest(quality~., training, mtry = 7)
+@
+\begin{enumerate}
+\item What’s the accuracy rate now?
+<<>>=
+rForest
+@
+\item Use \texttt{varImpPlot} to plot the importance figure. What’s the most important factor? \textit{Alcohol}
+<<fig=TRUE, height=2.5>>=
+par(mar=c(4,4,1,1), mgp = c(1.7,0.5,0))
+randomForest::varImpPlot(rForest)
+@
+\item Use bootstrap (100 times) to estimate the standard deviation of classification accuracies.
+(\texttt{set.seed(1)} before bootstrap)
+<<>>=
+set.seed(1)
+MSE <- sapply(1:100, function(x){
+  selectedR <- sample(seq_len(nrow(testing)), replace = TRUE)
+  prediction <- predict(rForest,testing[selectedR, 1:11])
+  mean((testing[selectedR,12] - prediction)^2)
+})
+sd(MSE)
+@
+\end{enumerate}
+\item Consider the binary classification problem. Suppose we denote the wine whose quality
+is larger than 5 as `good', otherwise we think it is `bad'. Similarly as before, randomly
+sample 1000 observations as training set, and use the tree method to do classification
+again. (\texttt{set.seed(1)} before sampling)
+<<>>=
+wineData[,12] <- factor(ifelse(test = wineData[,12] > 5, 
+                               yes = "G", 
+                               no = "B"))
+set.seed(1)
+training <- sample(n, size = 1000)
+testing <- n[!n %in% training]
+training <- wineData[training,]
+testing <- wineData[testing,]
+bC <- tree::tree(quality~., training)
+@
+\begin{enumerate}
+\item What’s the accuracy rate, sensitivity and specificity?
+<<>>=
+ConfussionMatrix <- table(Observed=testing[,12],
+  Predicted=predict(bC,testing[,-12], type = "class"))
+ConfussionMatrix
+# Accuracy
+sum(diag(ConfussionMatrix)/sum(ConfussionMatrix))
+# Sensitivity (True Positive Rate)
+ConfussionMatrix[2,2]/sum(ConfussionMatrix[2,])
+# Specificity (True Negative Rate)
+ConfussionMatrix[1,1]/sum(ConfussionMatrix[1,])
+@
+\item Let $\kappa$\texttt{ = seq(from = 0, to = 1, by = 0.01)}. Plot the ROC curve.
+<<fig=TRUE, height=2.5>>=
+bProb <- predict(bC,testing[,-12])[,1]
+K <- sapply(seq(from = 0, to = 1, by = 0.01), function(x){
+  ifelse(test = bProb > x,yes = "B", no = "G")
+})
+ROC <- t(apply(K,2,function(hat){
+  ConfussionMatrix <- table(Observed=testing[,12],
+                            Predicted=factor(hat, levels = c("B","G")))
+  c(ConfussionMatrix[1,2]/sum(ConfussionMatrix[1,]),
+    ConfussionMatrix[2,2]/sum(ConfussionMatrix[2,]))
+}))
+par(mar=c(4,4,1,1), mgp=c(1.6,0.5,0))
+plot(ROC, type = "l", ylab = "True Positive Rate", 
+     xlab = "False Positive Rate", main = "ROC", las = 1)
+@
+\item Use cross validation to decide the number of nodes. What’s the best choice?
+(\texttt{set.seed(1)} before cross validation)
+<<>>=
+accNodes <- c(NA,sapply(2:12, function(nNumber){
+  hat <- predict(tree::prune.tree(bC, best = nNumber),
+                 testing[,-12], "class")
+  ConfussionMatrix <- table(Observed=testing[,12],
+                            Predicted=factor(hat, levels = c("B","G")))
+  sum(diag(ConfussionMatrix)/sum(ConfussionMatrix))
+}))
+accNodes
+which.max(accNodes)
+@
+\item `Prune' your tree with respect to the number of nodes as 4, 7, 8 and plot the ROC
+curves in one figure with your original ROC curve in (c) which contains 9 nodes.
+From the figure, how many nodes would you choose?
+<<fig=TRUE, height=3>>=
+par(mar=c(4,4,1,1), mgp = c(1.7,0.5,0))
+plot(ROC, type = "l", ylab = "True Positive Rate", 
+     xlab = "False Positive Rate", main = "ROC", las = 1)
+colN <- 1
+for(i in c(4,7,8)){
+  bCp <- tree::prune.tree(bC,best = i)
+bProb <- predict(bCp,testing[,-12])[,1]
+K <- sapply(seq(from = 0, to = 1, by = 0.01), function(x){
+  ifelse(test = bProb > x,yes = "B", no = "G")
+})
+ROC <- t(apply(K,2,function(hat){
+  ConfussionMatrix <- table(Observed=testing[,12],
+                            Predicted=factor(hat, levels = c("B","G")))
+  c(ConfussionMatrix[1,2]/sum(ConfussionMatrix[1,]),
+    ConfussionMatrix[2,2]/sum(ConfussionMatrix[2,]))
+}))
+par(mar=c(4,4,1,1), mgp=c(1.6,0.5,0))
+colN <- colN + 1
+lines(ROC, lty = colN, col = colN)
+}
+legend("bottomright", 
+       legend = c(4,7,8,9), 
+       lty = c(2,3,4,1), 
+       col = c(2,3,4,1), 
+       bty = "n")
+@
+\end{enumerate}
+\end{enumerate}
+\end{enumerate}
+\end{document}
